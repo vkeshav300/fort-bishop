@@ -1,0 +1,13 @@
+{
+    "username": null,
+    "inventory": 
+    {
+        "credits": 45,
+        "items": [],
+        "resources":
+        {
+            "wood": 25,
+            "stone": 15
+        }
+    }
+}
