@@ -2,10 +2,13 @@
 
 #include <typeinfo>
 
+class Entity;
+class Component;
+
 // Base component class
 class Component {
     public:
-        // Entity *parent = nullptr;
+        Entity *parent = nullptr;
 
         Component() {}
         
@@ -30,32 +33,21 @@ class Entity {
                 componentsNum++;
                 
                 // Copies newComponent into the list of components
-                components[componentsNum - 1] = newComponent;
-                // components[componentsNum - 1].parent = *this;
-                components[componentsNum - 1].init();
+                components[componentsNum - 1] = dynamic_cast<TransformComponent>(newComponent);
 
                 // Deletes the newComponent to save space in memory
                 delete &newComponent;
-                
-                // components[componentsNum - 1]->parent = *this;
+
+                // Initializes component
+                components[componentsNum - 1].parent = this;
+                components[componentsNum - 1].init();                
             }
         }
 
-        bool hasComponent(auto searchComponent) {
-            // Loops through array and searches for specific component
+        TransformComponent *getTransform() {
             for(int i = 0; i < componentsNum; i++) {
-                if(typeid(components[i]) == typeid(*searchComponent)) {return true;}
+                if(typeid(components[i]) == typeid(TransformComponent())) {return *components[i];}
             }
-
-            return false;
-        }
-
-        auto getComponent(auto searchComponent) {
-            for(int i = 0; i < componentsNum; i++) {
-                if(typeid(components[i]) == typeid(*searchComponent)) {return components[i];}
-            }
-
-            return NULL;
         }
 
         void update() {
