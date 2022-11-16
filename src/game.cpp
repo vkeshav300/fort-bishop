@@ -50,6 +50,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     map = new Map();
 
     Player.addComponent(TransformComponent(50, 50));
+    Player.addComponent(SpriteComponent("assets/textures/entities/player.png"));
 }
 
 // Handles all events

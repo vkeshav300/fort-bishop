@@ -1,7 +1,5 @@
 # Folders
 .vscode/
-include/
-lib/
 
 # Build Artifacts
 *.exe
