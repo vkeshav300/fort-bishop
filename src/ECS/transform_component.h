@@ -23,6 +23,9 @@ class TransformComponent: public Component {
 
         // Adds the velocity to the position every frame (to move the entity)
         void update() override {
+            velocity.x++;
+            velocity.y++;
+            
             position.add(velocity);
         }
 
