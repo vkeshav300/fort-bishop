@@ -8,11 +8,12 @@
 
 // Creating neccessary objects and variables
 Map *map;
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
-Entity Player = Entity();
+auto& Player(manager.addEntity());
 
 // Game Constructor
 Game::Game() {}
@@ -49,15 +50,14 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     // Setting up neccessary objects and variables
     map = new Map();
 
-    Player.addComponent(TransformComponent(50, 50));
-    Player.addComponent(SpriteComponent("assets/textures/entities/player.png"));
+    Player.addComponent<TransformComponent>(50, 50);
+    Player.addComponent<SpriteComponent>("assets/textures/entites/player.png", 32, 32);
 }
 
 // Handles all events
 void Game::handleEvents() {
     // Gets all events
     SDL_PollEvent(&event);
-
     switch (event.type)
     {
         // If the game is quitting set isRunning to false
@@ -72,7 +72,8 @@ void Game::handleEvents() {
 
 // Updates everything (every frame)
 void Game::update() {
-    Player.update();
+    manager.update();
+    manager.refresh();
 }
 
 // Renders everything to the screen
@@ -85,7 +86,7 @@ void Game::render() {
 // Runs on game being quit
 void Game::clean(double shutdown_delay) {
     // Destructs Player
-    // delete &Player;
+    delete &Player;
     std::cout << " " << std::endl;
     std::cout << "Player Destructed" <<std::endl;
 
