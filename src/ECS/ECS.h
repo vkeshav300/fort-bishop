@@ -139,5 +139,3 @@ class Manager {
             return *e;
         }
 };
-
-// 24:57
