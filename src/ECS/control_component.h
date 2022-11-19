@@ -8,12 +8,15 @@ class ControlComponent : public Component {
         TransformComponent *transform;
 
     public:
+        // Constructors
         ControlComponent() = default;
 
+        // Initializes component
         void init() override {
             transform = &parent->getComponent<TransformComponent>();
         }
 
+        // Updates component
         void update() override {
             // Adjusts the velocity of the entity
             if(Game::event.type == SDL_KEYDOWN) {
