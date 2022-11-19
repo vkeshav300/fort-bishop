@@ -52,7 +52,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
 
     // Player
     Player.addComponent<TransformComponent>(50, 50);
-    Player.addComponent<SpriteComponent>("assets/textures/entities/player.png", 32, 32);
+    Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png", 32, 64);
     Player.addComponent<ControlComponent>();
 }
 
