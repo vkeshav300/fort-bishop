@@ -51,7 +51,6 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     map = new Map();
 
     Player.addComponent<TransformComponent>(50, 50);
-    Player.addComponent<SpriteComponent>("assets/textures/entites/player.png", 32, 32);
 }
 
 // Handles all events
@@ -80,6 +79,7 @@ void Game::update() {
 void Game::render() {
     SDL_RenderClear(renderer);
     map->DrawMap();
+    manager.draw();
     SDL_RenderPresent(renderer);
 }
 

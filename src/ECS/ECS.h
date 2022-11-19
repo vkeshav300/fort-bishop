@@ -60,7 +60,7 @@ class Entity {
         Entity() {}
         virtual ~Entity() {}
 
-        template<typename T, typename... TArgs> inline T& addComponent(TArgs&&... args) {
+        template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
             // Create Component
             T* c(new T(std::forward<TArgs>(args)...));
 
@@ -79,7 +79,7 @@ class Entity {
             return *c;
         }
 
-        template<typename T> inline T& getComponent() const {
+        template<typename T> T& getComponent() const {
             // Gets the component from component array
             auto ptr(compArr[getComponentTypeID<T>()]);
 
@@ -89,12 +89,12 @@ class Entity {
 
         void update() {
             // Goes through all the components (for this entity) calls their update method
-            for(auto &c : compArr) c->update();
+            for(auto &c : components) c->update();
         }
 
         void draw() {
-            // Goes through all the components (for this entity) and calls their draw method
-            for(auto &c : compArr) c->draw();
+            // Goes through all the components (for this entity) calls their draw method
+            for(auto &c : components) c->draw();
         }
 
         inline bool isActive() {return active;}
@@ -108,12 +108,12 @@ class Manager {
 
     public:
         void update() {
-            // Goes through all the entities and calls their update method
+            // Goes through all the entities and calls their update function
             for(auto &e : entities) e->update();
         }
 
         void draw() {
-            // Goes through all the entities and calls their draw method
+            // Goes through all the entities and calls their draw function
             for(auto &e : entities) e->draw();
         }
 
