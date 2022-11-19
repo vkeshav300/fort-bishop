@@ -2,48 +2,53 @@
 
 // Including
 #include "components.h"
-#include "../vector.h"
-#include "../textures.h"
 
 class SpriteComponent : public Component {
     private:
-        // Initializing variables
         TransformComponent *transform;
         SDL_Texture *texture;
         SDL_Rect srcRect, destRect;
-    
+
     public:
         // Constructors
-        SpriteComponent() {}
-
+        SpriteComponent() = default;
+        
         SpriteComponent(const char *path) {
+            // Loading texture
+            texture = TextureManager::LoadTexture(path);
+
+            // Setting height and position of projection rects
             srcRect.x = srcRect.y = 0;
             srcRect.w = srcRect.h = 32;
             destRect.w = destRect.h = srcRect.w * 2;
+        }
 
+        SpriteComponent(const char *path, int width, int height) {
+            // Loading texture
             texture = TextureManager::LoadTexture(path);
-        }
 
-        SpriteComponent(const char *path, int w, int h) {
-            srcRect.w = w; srcRect.h = h;
-            destRect.w = srcRect.w * 2; destRect.h = srcRect.h * 2;
-        }
-
-        // Init method (gets transform component)
-        void init() override {
-            transform = &parent->getComponent<TransformComponent>();
-
+            // Setting height and position of projection rects
             srcRect.x = srcRect.y = 0;
+            srcRect.w = width;
+            srcRect.h = height;
+            destRect.w = width * 2;
+            destRect.h = height * 2;
         }
 
-        // Draws textures to transform->position(x, y)
+        // Initializes component
+        void init() override {
+            // Getting transform component via entity->getComponent function
+            transform = &parent->getComponent<TransformComponent>();
+        }
+
+        // Updates component
         void update() override {
+            // Setting (x, y) of destRect projection rect
             destRect.x = transform->position.x;
             destRect.y = transform->position.y;
-
-            TextureManager::Draw(texture, srcRect, destRect);
         }
 
+        // Drawing texture to position of destRect
         void draw() override {
             TextureManager::Draw(texture, srcRect, destRect);
         }

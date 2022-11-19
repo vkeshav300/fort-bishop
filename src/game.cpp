@@ -50,7 +50,10 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     // Setting up neccessary objects and variables
     map = new Map();
 
+    // Player
     Player.addComponent<TransformComponent>(50, 50);
+    Player.addComponent<SpriteComponent>("assets/textures/entities/player.png", 32, 32);
+    Player.addComponent<ControlComponent>();
 }
 
 // Handles all events
@@ -88,7 +91,7 @@ void Game::clean(double shutdown_delay) {
     // Destructs Player
     delete &Player;
     std::cout << " " << std::endl;
-    std::cout << "Player Destructed" <<std::endl;
+    std::cout << "Player Destructed" << std::endl;
 
     // Destroys SDL Window
     SDL_DestroyWindow(window);

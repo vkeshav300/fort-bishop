@@ -3,6 +3,7 @@
 
 // Creating game pointer
 Game *game = nullptr;
+const char *title = "Fort Bishop";
 
 int main(int argc, char** argv) {
     // FPS limiting
@@ -13,7 +14,7 @@ int main(int argc, char** argv) {
 
     // Initializing game
     game = new Game();
-    game->init("C/C++ SDL2 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+    game->init(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 
     // Runs every frame, when game->isRunning is set to false (game->handleEvents()), it will exit the loop and run game.clean()
     while(game->running()) {
