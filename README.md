@@ -18,7 +18,7 @@ git push origin <branch_name>
 > Unzip the folder (**.zip** or **.tar**).
 > To run the game, run the **executable (.exe)** file in the folder you just downloaded.
 > Stress test the game. Try to find as many bugs and glitches as you can.
-> Once you are done, create a game tester report in [issues](https://github.com/vkeshav300/fort-bishop/issues).
+> For each bug / glitch submit a bug / glitch report in [issues](https://github.com/vkeshav300/fort-bishop/issues)
 > Make sure to let the developers know when you are done so they can read your report.
 
 ## Understanding The Version System
