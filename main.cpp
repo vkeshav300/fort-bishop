@@ -1,4 +1,7 @@
 // Entire file puts together game. The actual work goes on in header (.h) and other C++ (.cpp) files
+#define W_WIDTH 800
+#define W_HEIGHT 640
+
 #include "src/game.h"
 
 // Creating game pointer
@@ -14,7 +17,7 @@ int main(int argc, char** argv) {
 
     // Initializing game
     game = new Game();
-    game->init(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+    game->init(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, false);
 
     // Runs every frame, when game->isRunning is set to false (game->handleEvents()), it will exit the loop and run game.clean()
     while(game->running()) {
@@ -32,7 +35,7 @@ int main(int argc, char** argv) {
     }
 
     // Cleans game after running stopped
-    game->clean(2.5);
+    game->clean(1);
 
     return 0;
 }

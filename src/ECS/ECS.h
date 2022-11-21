@@ -12,6 +12,7 @@
 // Forward declaration of entity and component
 class Entity;
 class Component;
+class Manager;
 
 // Getting component methods and setting up ECS
 using ComponentTypeId = std::size_t;
