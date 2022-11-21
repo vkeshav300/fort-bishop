@@ -33,15 +33,15 @@ class SpriteComponent : public Component {
 
             // Setting height and position of projection rects
             srcRect.x = srcRect.y = 0;
-            srcRect.w = static_cast<int>(transform->size.x);
-            srcRect.h = static_cast<int>(transform->size.y);
-            destRect.w = static_cast<int>(transform->size.x * transform->scale);
-            destRect.h = static_cast<int>(transform->size.y * transform->scale);
+            srcRect.w = transform->size.x;
+            srcRect.h = transform->size.y;
+            destRect.w = transform->size.x * transform->scale;
+            destRect.h = transform->size.y * transform->scale;
         }
 
         // Updates component
         void update() override {
-            // Setting (x, y) of destRect projection rect
+            // Setting (x, y) of destination projection rect
             destRect.x = static_cast<int>(transform->position.x);
             destRect.y = static_cast<int>(transform->position.y);
         }

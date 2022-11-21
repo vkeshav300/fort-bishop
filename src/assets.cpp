@@ -1,5 +1,4 @@
 // Including
-#include "game.h"
 #include "assets.h"
 
 // Loading a texture
