@@ -1,5 +1,7 @@
-// Comments found in "textures.cpp"
+// Comments found in "assets.cpp"
 #pragma once
+
+#include "game.h"
 
 class TextureManager {
     public:

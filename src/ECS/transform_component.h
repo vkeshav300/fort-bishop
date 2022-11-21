@@ -14,7 +14,7 @@ class TransformComponent: public Component {
         Vector2D size = Vector2D(32.0f, 32.0f);
 
         // Scale factor
-        int scale = 1.0f;
+        int scale = 1;
 
         /*
         "move_factor" determines how many pixels / second an entity will move (position.(x,y) = velocity.(x,y) * move_factor)
