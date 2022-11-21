@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <iostream>
 
-// Forward declaration of entity and component
+// Forward declaration of entity, component, and manager
 class Entity;
 class Component;
 class Manager;
@@ -81,12 +81,14 @@ class Entity {
             return *c;
         }
 
-        template<typename T> T& getComponent() const {
-            // Gets the component from component array
-            auto ptr(compArr[getComponentTypeID<T>()]);
+        template<typename T> bool hasComponent() const {
+            // Returns the bitset (bool value)
+            return compBitset[getComponentTypeID<T>()];
+        }
 
+        template<typename T> T& getComponent() const {
             // Returns pointer to component
-            return *static_cast<T*>(ptr);
+            return *static_cast<T*>(compArr[getComponentTypeID<T>()]);
         }
 
         void update() {

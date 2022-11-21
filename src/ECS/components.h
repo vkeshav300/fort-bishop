@@ -8,3 +8,4 @@
 #include "transform_component.h"
 #include "sprite_component.h"
 #include "control_component.h"
+#include "hitbox_component.h"
