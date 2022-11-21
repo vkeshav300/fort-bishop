@@ -1,6 +1,6 @@
 // Including
 #include "game.h"
-#include "textures.h"
+#include "assets.h"
 
 // Loading a texture
 SDL_Texture* TextureManager::LoadTexture(const char* filename) {
