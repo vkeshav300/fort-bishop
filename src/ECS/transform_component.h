@@ -10,11 +10,17 @@ class TransformComponent: public Component {
         Vector2D position;
         Vector2D velocity = Vector2D(0.0f, 0.0f); // By default velocity will be set to (0, 0)
 
+        // Vector (x, y) for size (width, height)
+        Vector2D size = Vector2D(32.0f, 32.0f);
+
+        // Scale factor
+        int scale = 1.0f;
+
         /*
         "move_factor" determines how many pixels / second an entity will move (position.(x,y) = velocity.(x,y) * move_factor)
         if a player were to drink a potion to adjust their speed, move factor would be adjusted, not velocity.
         */
-        int move_factor = 1;
+        float move_factor = 1.0f;
 
         // Constructors
         // By default position will be at (0, 0)
@@ -23,6 +29,21 @@ class TransformComponent: public Component {
         TransformComponent(float xPos, float yPos) {
             position.x = xPos;
             position.y = yPos;
+        }
+
+        TransformComponent(float xPos, float yPos, int w, int h) {
+            position.x = xPos;
+            position.y = yPos;
+            size.x = static_cast<float>(w);
+            size.y = static_cast<float>(h);
+        }
+
+        TransformComponent(float xPos, float yPos, int w, int h, int SF) {
+            position.x = xPos;
+            position.y = yPos;
+            size.x = static_cast<float>(w);
+            size.y = static_cast<float>(h);
+            scale = SF;
         }
 
         // Initializes component

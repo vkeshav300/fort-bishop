@@ -14,6 +14,7 @@ SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
 auto& Player(manager.addEntity());
+auto& testWall(manager.addEntity());
 
 // Game Constructor
 Game::Game() {}
@@ -51,9 +52,10 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     map = new Map();
 
     // Player
-    Player.addComponent<TransformComponent>(50, 50);
-    Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png", 32, 64);
+    Player.addComponent<TransformComponent>(50.0f, 50.0f, 32, 64);
+    Player.addComponent<SpriteComponent>("assets/textures/entities/player.png");
     Player.addComponent<ControlComponent>();
+    Player.addComponent<HitboxComponent>("player");
 }
 
 // Handles all events

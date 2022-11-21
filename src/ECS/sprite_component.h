@@ -2,6 +2,7 @@
 
 // Including
 #include "components.h"
+#include "../assets.h"
 
 class SpriteComponent : public Component {
     private:
@@ -16,36 +17,33 @@ class SpriteComponent : public Component {
         SpriteComponent(const char *path) {
             // Loading texture
             texture = TextureManager::LoadTexture(path);
-
-            // Setting height and position of projection rects
-            srcRect.x = srcRect.y = 0;
-            srcRect.w = srcRect.h = 32;
-            destRect.w = destRect.h = srcRect.w * 2;
         }
 
-        SpriteComponent(const char *path, int width, int height) {
-            // Loading texture
-            texture = TextureManager::LoadTexture(path);
-
-            // Setting height and position of projection rects
-            srcRect.x = srcRect.y = 0;
-            srcRect.w = width;
-            srcRect.h = height;
-            destRect.w = width * 2;
-            destRect.h = height * 2;
+        // Deconstructors
+        ~SpriteComponent() {
+            SDL_DestroyTexture(texture);
         }
 
         // Initializes component
         void init() override {
-            // Getting transform component via entity->getComponent function
+            // If entity does not have a "TransformComponent", it will automatically add one to prevent errors  
+            if(!parent->hasComponent<TransformComponent>()) {parent->addComponent<TransformComponent>();}
+
             transform = &parent->getComponent<TransformComponent>();
+
+            // Setting height and position of projection rects
+            srcRect.x = srcRect.y = 0;
+            srcRect.w = static_cast<int>(transform->size.x);
+            srcRect.h = static_cast<int>(transform->size.y);
+            destRect.w = static_cast<int>(transform->size.x * transform->scale);
+            destRect.h = static_cast<int>(transform->size.y * transform->scale);
         }
 
         // Updates component
         void update() override {
             // Setting (x, y) of destRect projection rect
-            destRect.x = transform->position.x;
-            destRect.y = transform->position.y;
+            destRect.x = static_cast<int>(transform->position.x);
+            destRect.y = static_cast<int>(transform->position.y);
         }
 
         // Drawing texture to position of destRect

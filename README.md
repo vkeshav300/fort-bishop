@@ -2,7 +2,7 @@
 The Fort Bishop game.
 
 ## [Developer](https://github.com/vkeshav300/fort-bishop/#developer-instructions) Instructions:
-> (Git) Pull the newest version of the game
+> (Git) Get the newest version of the game
 ```
 git pull origin master
 ```
