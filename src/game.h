@@ -9,6 +9,10 @@
 
 #include <iostream>
 #include <cmath>
+#include <vector>
+
+// Forward declaration of "ColliderComponent"
+class HitboxComponent;
 
 // Game class
 class Game {
@@ -20,6 +24,9 @@ class Game {
 
     // Public variables and methods
     public:
+        // All hitboxes (for all entities)
+        static std::vector<HitboxComponent*> borders;
+
         // Constructor
         Game();
 

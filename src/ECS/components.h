@@ -9,3 +9,4 @@
 #include "sprite_component.h"
 #include "control_component.h"
 #include "hitbox_component.h"
+#include "tile_component.h"
