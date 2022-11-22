@@ -18,7 +18,7 @@ class TransformComponent: public Component {
         float move_factor = 1.0f;
 
         // Vector (x, y) for size (width, height)
-        Vector2D size = Vector2D(32.0f, 32.0f); // By default size will be set to (0, 0)
+        Vector2D size = Vector2D(32.0f, 64.0f); // By default size will be set to (0, 0)
 
         // Scale factor
         int scale = 1; // By default scale will be set to 1
@@ -31,6 +31,16 @@ class TransformComponent: public Component {
 
         // Constructors
         TransformComponent() = default;
+
+        TransformComponent(int SF) {
+            scale = SF;
+        }
+
+        TransformComponent(int SF, bool ndmg, int maxHealth) {
+            scale = SF;
+            invincible = ndmg;
+            health.x = health.y = maxHealth;
+        }
         
         TransformComponent(float xPos, float yPos) {
             position.x = xPos;
@@ -53,8 +63,7 @@ class TransformComponent: public Component {
 
             // Health
             invincible = ndmg;
-            health.x = maxHealth;
-            health.y = maxHealth;
+            health.x = health.y = maxHealth;
         }
 
         TransformComponent(float xPos, float yPos, int w, int h, int SF) {
@@ -75,8 +84,7 @@ class TransformComponent: public Component {
 
             // Health
             invincible = ndmg;
-            health.x = maxHealth;
-            health.y = maxHealth;
+            health.x = health.y = maxHealth;
         }
 
         // Initializes component

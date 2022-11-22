@@ -52,7 +52,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     map = new Map();
 
     // Player
-    Player.addComponent<TransformComponent>(50, 50, 32, 64, false, 12);
+    Player.addComponent<TransformComponent>(1, false, 10);
     Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png");
     Player.addComponent<ControlComponent>();
     Player.addComponent<HitboxComponent>("player");
@@ -83,6 +83,10 @@ void Game::handleEvents() {
 void Game::update() {
     manager.update();
     manager.refresh();
+
+    if(Collision::AABB(Player.getComponent<HitboxComponent>(), testWall.getComponent<HitboxComponent>())) {
+        std::cout << "wall hit" << std::endl;
+    }
 }
 
 // Renders everything to the screen
