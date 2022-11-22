@@ -52,13 +52,13 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     map = new Map();
 
     // Player
-    Player.addComponent<TransformComponent>(50, 50, 32, 64);
+    Player.addComponent<TransformComponent>(50, 50, 32, 64, false, 12);
     Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png");
     Player.addComponent<ControlComponent>();
     Player.addComponent<HitboxComponent>("player");
 
     // Wall
-    testWall.addComponent<TransformComponent>(300, 300, 20, 300);
+    testWall.addComponent<TransformComponent>(300, 300, 20, 300, true, 1);
     testWall.addComponent<SpriteComponent>("assets/textures/tiles/dirt.png");
     testWall.addComponent<HitboxComponent>("testwall");
 }
