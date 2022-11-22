@@ -24,6 +24,9 @@ class Vector2D {
         Vector2D &operator-=(const Vector2D &vec);
         Vector2D &operator*=(const Vector2D &vec);
         Vector2D &operator/=(const Vector2D &vec);
+        Vector2D &operator*(const int &i);
+
+        Vector2D &Zero();
 
         friend std::ostream &operator<<(std::ostream &stream, const Vector2D &vec);
 };

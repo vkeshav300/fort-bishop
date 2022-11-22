@@ -35,8 +35,6 @@ class SpriteComponent : public Component {
             srcRect.x = srcRect.y = 0;
             srcRect.w = transform->size.x;
             srcRect.h = transform->size.y;
-            destRect.w = transform->size.x * transform->scale;
-            destRect.h = transform->size.y * transform->scale;
         }
 
         // Updates component
@@ -44,6 +42,8 @@ class SpriteComponent : public Component {
             // Setting (x, y) of destination projection rect
             destRect.x = static_cast<int>(transform->position.x);
             destRect.y = static_cast<int>(transform->position.y);
+            destRect.w = transform->size.x * transform->scale;
+            destRect.h = transform->size.y * transform->scale;
         }
 
         // Drawing texture to position of destRect
