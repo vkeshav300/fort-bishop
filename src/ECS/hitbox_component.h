@@ -8,10 +8,10 @@ class HitboxComponent : public Component {
     private:
         TransformComponent *transform;
 
-        SDL_Rect collider;
+    public:
+        SDL_Rect hitbox;
         std::string tag;
 
-    public:
         // Constructors
         HitboxComponent() = default;
 
@@ -28,9 +28,9 @@ class HitboxComponent : public Component {
         // Updates component
         void update() override {
             // Updates hitbox
-            collider.x = static_cast<int>(transform->position.x);
-            collider.y = static_cast<int>(transform->position.y);
-            collider.w = transform->size.x * transform->scale;
-            collider.h = transform->size.y * transform->scale;
+            hitbox.x = static_cast<int>(transform->position.x);
+            hitbox.y = static_cast<int>(transform->position.y);
+            hitbox.w = transform->size.x * transform->scale;
+            hitbox.h = transform->size.y * transform->scale;
         }
 };
