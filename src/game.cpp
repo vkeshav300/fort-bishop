@@ -18,6 +18,14 @@ std::vector<HitboxComponent*> Game::collisions;
 // Player Creation
 auto &Player(manager.addEntity());
 
+// Render layer enum
+enum groupLabels : std::size_t {
+    groupMap = 0,
+    groupPlayers,
+    groupEnemies,
+    groupColliders
+};
+
 // Game Constructor
 Game::Game() {}
 
@@ -58,6 +66,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png");
     Player.addComponent<ControlComponent>();
     Player.addComponent<HitboxComponent>("player");
+    Player.addGroup(groupPlayers);
 }
 
 // Handles all events
@@ -89,39 +98,58 @@ void Game::update() {
     }
 }
 
+// Gets entities from groups
+auto &players(manager.getEntitiesFromGroup(groupPlayers));
+auto &mapEntities(manager.getEntitiesFromGroup(groupMap));
+auto &enemies(manager.getEntitiesFromGroup(groupEnemies));
+
 // Renders everything to the screen
 void Game::render() {
+    // Clears renderer
     SDL_RenderClear(renderer);
-    manager.draw();
+    
+    /*
+    Loads all entities for rendering
+    Order matters, the last group to be rendered will have higher rendering priority than the others.
+    */
+    for(auto &e : mapEntities) {e->draw();}
+    for(auto &e : enemies) {e->draw();}
+    for(auto &e : players) {e->draw();}
+
+    // Renders all changes in this frame
     SDL_RenderPresent(renderer);
 }
 
 // Runs on game being quit
 void Game::clean(double shutdown_delay) {
     // Destructs Player
-    delete &Player;
+    Player.destroy();
     std::cout << " " << std::endl;
-    std::cout << "1) Player Destructed" << std::endl;
+    std::cout << "1: Player Deactivated" << std::endl;
+
+    manager.refresh();
+    std::cout << "2: Manager Refreshed" << std::endl;
 
     // Destroys SDL Window
     SDL_DestroyWindow(window);
-    std::cout << "2) Window destroyed" << std::endl;
+    std::cout << "3: Window destroyed" << std::endl;
 
     // Destroys SDL Renderer
     SDL_DestroyRenderer(renderer);
-    std::cout << "3) Renderer destroyed" << std::endl;
+    std::cout << "4: Renderer destroyed" << std::endl;
 
     // Quits SDL
     SDL_Quit();
-    std::cout << "4) Game Cleaned" << std::endl;
+    std::cout << "5: Game Cleaned" << std::endl;
 
     // Delay to see confirmation messages
     float shutdown_ms = shutdown_delay * 1000;
-    std::cout << "5) Shutting down in " << shutdown_ms << " ms" << std::endl;
+    std::cout << "6: Shutting down in " << shutdown_ms << " ms" << std::endl;
     SDL_Delay(shutdown_ms);
 }
 
 void Game::addTile(int id, int x, int y) {
     auto &tile = manager.addEntity();
     tile.addComponent<TileComponent>(x, y, 32, 32, id);
+    tile.addGroup(groupMap);
 }
