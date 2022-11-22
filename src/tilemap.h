@@ -4,19 +4,14 @@
 #include "game.h"
 #include "assets.h"
 
-class Map {
-    private:
-        SDL_Rect src, dest;
-        SDL_Texture* dirt;
-        SDL_Texture *grass;
-        SDL_Texture *path_grass;
-        SDL_Texture *water;
-        int map[20][25];
+#include <string>
+#include <fstream>
+#include <cstdlib>
 
+class Map {
     public:
         Map();
         ~Map();
 
-        void LoadMap(int arr[20][25]);
-        void DrawMap();
+        static void LoadMap(std::string path, int sizeX, int sizeY);
 };

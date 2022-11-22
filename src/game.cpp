@@ -13,16 +13,10 @@ Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
-std::vector<HitboxComponent*> Game::borders;
+std::vector<HitboxComponent*> Game::collisions;
 
 // Player Creation
 auto &Player(manager.addEntity());
-auto &testWall(manager.addEntity());
-
-// Tiles
-auto &tile0(manager.addEntity());
-auto &tile1(manager.addEntity());
-auto &tile2(manager.addEntity());
 
 // Game Constructor
 Game::Game() {}
@@ -57,26 +51,13 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     isRunning = true;
 
     // Setting up neccessary objects and variables
-    map = new Map();
-
-    // Tiles
-    tile0.addComponent<TileComponent>(200, 200, 32, 32, 2);
-    tile0.addComponent<HitboxComponent>("water");
-    tile1.addComponent<TileComponent>(150, 150, 32, 32, 2);
-    tile1.addComponent<HitboxComponent>("water");
-    tile2.addComponent<TileComponent>(250, 250, 32, 32, 2);
-    tile2.addComponent<HitboxComponent>("water");
-
+    Map::LoadMap("assets/tilemaps/fort-bishop.map", 16, 16);
+    
     // Player
     Player.addComponent<TransformComponent>(1, false, 10);
     Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png");
     Player.addComponent<ControlComponent>();
     Player.addComponent<HitboxComponent>("player");
-
-    // Wall
-    testWall.addComponent<TransformComponent>(300, 300, 20, 300, true, 1);
-    testWall.addComponent<SpriteComponent>("assets/textures/tiles/dirt.png");
-    testWall.addComponent<HitboxComponent>("testwall");
 }
 
 // Handles all events
@@ -103,7 +84,7 @@ void Game::update() {
     // Handles all collisions
     HitboxComponent *PlayerHitboxComponent = &Player.getComponent<HitboxComponent>();
 
-    for(auto hc: borders) {
+    for(auto hc: collisions) {
         if(hc != PlayerHitboxComponent) Collision::AABB(Player.getComponent<HitboxComponent>(), *hc);
     }
 }
@@ -111,7 +92,6 @@ void Game::update() {
 // Renders everything to the screen
 void Game::render() {
     SDL_RenderClear(renderer);
-    map->DrawMap();
     manager.draw();
     SDL_RenderPresent(renderer);
 }
@@ -121,22 +101,27 @@ void Game::clean(double shutdown_delay) {
     // Destructs Player
     delete &Player;
     std::cout << " " << std::endl;
-    std::cout << "Player Destructed" << std::endl;
+    std::cout << "1) Player Destructed" << std::endl;
 
     // Destroys SDL Window
     SDL_DestroyWindow(window);
-    std::cout << "Window destroyed" << std::endl;
+    std::cout << "2) Window destroyed" << std::endl;
 
     // Destroys SDL Renderer
     SDL_DestroyRenderer(renderer);
-    std::cout << "Renderer destroyed" << std::endl;
+    std::cout << "3) Renderer destroyed" << std::endl;
 
     // Quits SDL
     SDL_Quit();
-    std::cout << "Game Cleaned, Shutting Down" << std::endl;
+    std::cout << "4) Game Cleaned" << std::endl;
 
     // Delay to see confirmation messages
     float shutdown_ms = shutdown_delay * 1000;
-    std::cout << "Shutting down in " << shutdown_ms << " ms" << std::endl;
+    std::cout << "5) Shutting down in " << shutdown_ms << " ms" << std::endl;
     SDL_Delay(shutdown_ms);
+}
+
+void Game::addTile(int id, int x, int y) {
+    auto &tile = manager.addEntity();
+    tile.addComponent<TileComponent>(x, y, 32, 32, id);
 }
