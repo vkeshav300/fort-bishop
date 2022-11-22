@@ -85,7 +85,8 @@ void Game::update() {
     manager.refresh();
 
     if(Collision::AABB(Player.getComponent<HitboxComponent>(), testWall.getComponent<HitboxComponent>())) {
-        std::cout << "wall hit" << std::endl;
+        // Inverses the player's velocity that way the player temporarily moves the opposite direction
+        Player.getComponent<TransformComponent>().velocity * -1;
     }
 }
 
