@@ -25,7 +25,7 @@ class Game {
     // Public variables and methods
     public:
         // All hitboxes (for all entities)
-        static std::vector<HitboxComponent*> borders;
+        static std::vector<HitboxComponent*> collisions;
 
         // Constructor
         Game();
@@ -50,6 +50,8 @@ class Game {
 
         // Returns if the game is running
         inline bool running() {return isRunning;}
+
+        static void addTile(int id, int x, int y);
 
         static SDL_Renderer *renderer;
         static SDL_Event event;

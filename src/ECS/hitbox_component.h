@@ -22,7 +22,7 @@ class HitboxComponent : public Component {
 
             transform = &parent->getComponent<TransformComponent>();
 
-            Game::borders.push_back(this);
+            Game::collisions.push_back(this);
         }
 
         // Updates component
