@@ -63,7 +63,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     
     // Player
     Player.addComponent<TransformComponent>(1, false, 10);
-    Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png");
+    Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png", 2, 500);
     Player.addComponent<ControlComponent>();
     Player.addComponent<HitboxComponent>("player");
     Player.addGroup(groupPlayers);
