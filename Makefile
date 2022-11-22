@@ -6,12 +6,3 @@ run:
 
 pull_m:
 	git pull origin master
-
-branch:
-	git branch
-
-push_m:
-	git push origin master
-
-status:
-	git status
