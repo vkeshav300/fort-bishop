@@ -3,3 +3,6 @@
 
 # Build Artifacts
 *.exe
+
+# Other Files
+SECURITY.md
