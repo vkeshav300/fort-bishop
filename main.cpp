@@ -1,23 +1,24 @@
 // Entire file puts together game. The actual work goes on in header (.h) and other C++ (.cpp) files
-#define W_WIDTH 800
-#define W_HEIGHT 640
-
 #include "src/game.h"
 
 // Creating game pointer
 Game *game = nullptr;
+
+// Customize window
 const char *title = "Fort Bishop";
+int size[2] = {512, 512};
+bool fullscreen = false;
+
+// FPS limiting
+const int FPS = 144;
+const int frameDelay = 1000 / FPS;
+Uint32 frameStart;
+int frameTime;
 
 int main(int argc, char** argv) {
-    // FPS limiting
-    const int FPS = 144;
-    const int frameDelay = 1000 / FPS;
-    Uint32 frameStart;
-    int frameTime;
-
     // Initializing game
     game = new Game();
-    game->init(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, false);
+    game->init(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size[0], size[1], fullscreen);
 
     // Runs every frame, when game->isRunning is set to false (game->handleEvents()), it will exit the loop and run game.clean()
     while(game->running()) {
