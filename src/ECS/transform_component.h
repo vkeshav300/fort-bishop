@@ -7,24 +7,30 @@
 class TransformComponent: public Component {
     public:
         // Vectors (x, y) for position and velocity
-        Vector2D position;
+        Vector2D position = Vector2D(0.0f, 0.0f); // By default position will be set to (0, 0)
         Vector2D velocity = Vector2D(0.0f, 0.0f); // By default velocity will be set to (0, 0)
-
-        // Vector (x, y) for size (width, height)
-        Vector2D size = Vector2D(32.0f, 32.0f);
-
-        // Scale factor
-        int scale = 1;
 
         /*
         "move_factor" determines how many pixels / second an entity will move (position.(x,y) = velocity.(x,y) * move_factor)
         if a player were to drink a potion to adjust their speed, move factor would be adjusted, not velocity.
+        By default "move_factor" will be set to 1.
         */
         float move_factor = 1.0f;
 
+        // Vector (x, y) for size (width, height)
+        Vector2D size = Vector2D(32.0f, 32.0f); // By default size will be set to (0, 0)
+
+        // Scale factor
+        int scale = 1; // By default scale will be set to 1
+
+        // Health
+        bool invincible = false; // By default invincible will be set to false
+
+        // Vector (current_health, max_health) for health.
+        Vector2D health = Vector2D(10.0f, 10.0f); // By default health will be set to 10/10
+
         // Constructors
-        // By default position will be at (0, 0)
-        TransformComponent() {position.x = position.y = 0.0f;}
+        TransformComponent() = default;
         
         TransformComponent(float xPos, float yPos) {
             position.x = xPos;
@@ -38,6 +44,19 @@ class TransformComponent: public Component {
             size.y = static_cast<float>(h);
         }
 
+        TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth) {
+            // Position and size vectors
+            position.x = xPos;
+            position.y = yPos;
+            size.x = static_cast<float>(w);
+            size.y = static_cast<float>(h);
+
+            // Health
+            invincible = ndmg;
+            health.x = maxHealth;
+            health.y = maxHealth;
+        }
+
         TransformComponent(float xPos, float yPos, int w, int h, int SF) {
             position.x = xPos;
             position.y = yPos;
@@ -46,10 +65,23 @@ class TransformComponent: public Component {
             scale = SF;
         }
 
+        TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth, int SF) {
+            // Position and size vectors
+            position.x = xPos;
+            position.y = yPos;
+            size.x = static_cast<float>(w);
+            size.y = static_cast<float>(h);
+            scale = SF;
+
+            // Health
+            invincible = ndmg;
+            health.x = maxHealth;
+            health.y = maxHealth;
+        }
+
         // Initializes component
         void init() override {
-            velocity.x = 0;
-            velocity.y = 0;
+            if(invincible) health.x = health.y = 1;
         }
 
         // Adds the velocity to the position every frame (to move the entity)
@@ -64,5 +96,24 @@ class TransformComponent: public Component {
         void forceMove(int xPos, int yPos) {
             position.x = xPos;
             position.y = yPos;
+        }
+
+        // Damages entity (with accordance to invicible boolean)
+        void damage(int amt) {
+            if(invincible || health.x <= 0) return;
+
+            // Subtracts health from entity
+            health.x -= amt;
+
+            if(health.x <= 0) health.x = 0;
+        }
+
+        // Heals the entity (with accordance to invincible boolean)
+        void heal(int amt) {
+            if(invincible) return;
+
+            health.x += amt;
+
+            if(health.x > health.y) health.x = health.y;
         }
 };

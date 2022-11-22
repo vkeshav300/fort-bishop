@@ -9,5 +9,11 @@
             "wood": 25,
             "stone": 15
         }
+    },
+
+    "health": {
+        "invincible": false,
+        "hp": 10,
+        "mhp": 10
     }
 }
