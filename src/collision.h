@@ -7,5 +7,5 @@
 class Collision {
     public:
         static bool AABB(const SDL_Rect& recA, const SDL_Rect& recB);
-        static bool AABB(const HitboxComponent& hitA, const HitboxComponent& hitB);
+        static void AABB(const HitboxComponent& hitA, const HitboxComponent& hitB);
 };

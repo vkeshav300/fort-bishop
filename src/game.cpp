@@ -13,8 +13,16 @@ Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
-auto& Player(manager.addEntity());
-auto& testWall(manager.addEntity());
+std::vector<HitboxComponent*> Game::borders;
+
+// Player Creation
+auto &Player(manager.addEntity());
+auto &testWall(manager.addEntity());
+
+// Tiles
+auto &tile0(manager.addEntity());
+auto &tile1(manager.addEntity());
+auto &tile2(manager.addEntity());
 
 // Game Constructor
 Game::Game() {}
@@ -51,6 +59,14 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     // Setting up neccessary objects and variables
     map = new Map();
 
+    // Tiles
+    tile0.addComponent<TileComponent>(200, 200, 32, 32, 2);
+    tile0.addComponent<HitboxComponent>("water");
+    tile1.addComponent<TileComponent>(150, 150, 32, 32, 2);
+    tile1.addComponent<HitboxComponent>("water");
+    tile2.addComponent<TileComponent>(250, 250, 32, 32, 2);
+    tile2.addComponent<HitboxComponent>("water");
+
     // Player
     Player.addComponent<TransformComponent>(1, false, 10);
     Player.addComponent<SpriteComponent>("assets/textures/entities/player/idle.png");
@@ -84,9 +100,11 @@ void Game::update() {
     manager.update();
     manager.refresh();
 
-    if(Collision::AABB(Player.getComponent<HitboxComponent>(), testWall.getComponent<HitboxComponent>())) {
-        // Inverses the player's velocity that way the player temporarily moves the opposite direction
-        Player.getComponent<TransformComponent>().velocity * -1;
+    // Handles all collisions
+    HitboxComponent *PlayerHitboxComponent = &Player.getComponent<HitboxComponent>();
+
+    for(auto hc: borders) {
+        if(hc != PlayerHitboxComponent) Collision::AABB(Player.getComponent<HitboxComponent>(), *hc);
     }
 }
 

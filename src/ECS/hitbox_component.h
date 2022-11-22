@@ -5,10 +5,8 @@
 #include <string>
 
 class HitboxComponent : public Component {
-    private:
-        TransformComponent *transform;
-
     public:
+        TransformComponent *transform;
         SDL_Rect hitbox;
         std::string tag;
 
@@ -23,6 +21,8 @@ class HitboxComponent : public Component {
             if(!parent->hasComponent<TransformComponent>()) {parent->addComponent<TransformComponent>();}
 
             transform = &parent->getComponent<TransformComponent>();
+
+            Game::borders.push_back(this);
         }
 
         // Updates component
