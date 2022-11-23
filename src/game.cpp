@@ -1,6 +1,6 @@
 // Including
 #include "game.h"
-#include "assets.h"
+#include "textures.h"
 #include "tilemap.h"
 #include "vector.h"
 #include "collision.h"
