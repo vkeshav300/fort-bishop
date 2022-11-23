@@ -3,7 +3,7 @@
 // Including
 #include "components.h"
 #include "animation.h"
-#include "../assets.h"
+#include "../textures.h"
 
 #include <map>
 
@@ -41,16 +41,20 @@ class SpriteComponent : public Component {
 
             // Sets animated to true
             animated = isAnimated;
+            int move_speed = 250;
 
             // All walk cycle animations
             Animation idle = Animation(0, 2, 750);
             animations.emplace("I", idle);
 
-            Animation walk = Animation(1, 4, 350);
+            Animation walk = Animation(1, 4, move_speed);
             animations.emplace("H", walk);
 
-            Animation up_down = Animation(2, 2, 350);
-            animations.emplace("V", up_down);
+            Animation down = Animation(2, 2, move_speed);
+            animations.emplace("D", down);
+
+            Animation up = Animation(3, 2, move_speed);
+            animations.emplace("U", up);
 
             play("I");
         }

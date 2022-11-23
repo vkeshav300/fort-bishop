@@ -2,7 +2,7 @@
 #pragma once
 
 #include "game.h"
-#include "assets.h"
+#include "textures.h"
 
 #include <string>
 #include <fstream>
