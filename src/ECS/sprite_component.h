@@ -2,19 +2,31 @@
 
 // Including
 #include "components.h"
+#include "animation.h"
 #include "../assets.h"
+
+#include <map>
 
 class SpriteComponent : public Component {
     private:
+        // Sprite properties
         TransformComponent *transform;
         SDL_Texture *texture;
         SDL_Rect srcRect, destRect;
 
+        // Animation properties
         bool animated = false;
         int frames = 0;
         int ms_delay = 100;
 
     public:
+        int animIndex = 0;
+
+        // Holds animations
+        std::map<const char*, Animation> animations;
+
+        SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
+
         // Constructors
         SpriteComponent() = default;
         
@@ -23,14 +35,24 @@ class SpriteComponent : public Component {
             setTex(path);
         }
 
-        SpriteComponent(const char *path, int nFrames, int mDelay) {
+        SpriteComponent(const char *path, bool isAnimated) {
             // Loading texture
             setTex(path);
 
-            // Animation properties
-            animated = true;
-            frames = nFrames;
-            ms_delay = mDelay;
+            // Sets animated to true
+            animated = isAnimated;
+
+            // All walk cycle animations
+            Animation idle = Animation(0, 2, 750);
+            animations.emplace("I", idle);
+
+            Animation walk = Animation(1, 4, 350);
+            animations.emplace("H", walk);
+
+            Animation up_down = Animation(2, 2, 350);
+            animations.emplace("V", up_down);
+
+            play("I");
         }
 
         // Deconstructors
@@ -60,6 +82,9 @@ class SpriteComponent : public Component {
             // If entity is animated, change selection from animation atlas
             if(animated) srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / ms_delay) % frames);
 
+            // Gets the frame from the atlas (if there is one)
+            srcRect.y = animIndex * transform->size.y;
+
             // Setting (x, y) of destination projection rect
             destRect.x = static_cast<int>(transform->position.x);
             destRect.y = static_cast<int>(transform->position.y);
@@ -69,6 +94,12 @@ class SpriteComponent : public Component {
 
         // Drawing texture to position of destRect
         void draw() override {
-            TextureManager::Draw(texture, srcRect, destRect);
+            TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
+        }
+
+        void play(const char *animName) {
+            animIndex = animations[animName].index;
+            frames = animations[animName].frames;
+            ms_delay = animations[animName].ms_delay;
         }
 };
