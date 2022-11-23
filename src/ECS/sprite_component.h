@@ -64,6 +64,7 @@ class SpriteComponent : public Component {
             SDL_DestroyTexture(texture);
         }
 
+        // Wrapper for TextureManager::LoadTexture
         void setTex(const char *path) {
             texture = TextureManager::LoadTexture(path);
         }
@@ -101,6 +102,7 @@ class SpriteComponent : public Component {
             TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
         }
 
+        // Plays specific animation
         void play(const char *animName) {
             animIndex = animations[animName].index;
             frames = animations[animName].frames;

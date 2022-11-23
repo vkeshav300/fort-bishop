@@ -59,7 +59,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     isRunning = true;
 
     // Setting up neccessary objects and variables
-    Map::LoadMap("assets/tilemaps/fort-bishop.map", 16, 16);
+    Map::LoadMap("assets/tilemaps/base.map", 16, 16);
     
     // Player
     Player.addComponent<TransformComponent>(1, false, 10);
@@ -148,6 +148,7 @@ void Game::clean(double shutdown_delay) {
     SDL_Delay(shutdown_ms);
 }
 
+// Adds tile into ECS & tilemap
 void Game::addTile(int id, int x, int y) {
     auto &tile = manager.addEntity();
     tile.addComponent<TileComponent>(x, y, 32, 32, id);

@@ -14,6 +14,15 @@
 // Forward declaration of "ColliderComponent"
 class HitboxComponent;
 
+// Enum directions
+enum eDir {
+    IDLE = 0,
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT
+};
+
 // Game class
 class Game {
     // Private variables

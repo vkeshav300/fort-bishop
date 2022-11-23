@@ -72,8 +72,10 @@ class Entity {
         bool active = true;
 
     public:
+        // Constructors
         Entity(Manager& mManger) : manager(mManger) {}
 
+        // Adds component to component array
         template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
             // Create Component
             T* c(new T(std::forward<TArgs>(args)...));
@@ -92,12 +94,14 @@ class Entity {
             c->init();
             return *c;
         }
-
+        
+        // Checks to see if a certain type of component is in component array
         template<typename T> bool hasComponent() const {
             // Returns the bitset (bool value)
             return compBitset[getComponentTypeID<T>()];
         }
-
+        
+        // Returns a certain type of component from component array
         template<typename T> T& getComponent() const {
             // Returns pointer to component
             return *static_cast<T*>(compArr[getComponentTypeID<T>()]);
@@ -153,6 +157,7 @@ class Manager {
             for(auto &e : entities) e->draw();
         }
 
+        // Refreshes ECS
         void refresh() {
             // Refreshes groups
             for(auto i(0u); i < MAX_GROUPS; i++) {
@@ -192,6 +197,7 @@ class Manager {
             return groupedEntities[mGroup];
         }
 
+        // Creates, adds, and returns entity (use this when creating an entity so it is compatible with manager system)
         Entity &addEntity() {
             // Creates and adds a new Entity
             Entity *e = new Entity(*this);

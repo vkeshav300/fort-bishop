@@ -3,14 +3,11 @@
 // Including
 #include "components.h"
 
-// Enum of directions
-enum eDir {
-    IDLE = 0,
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT
-};
+/*
+NOTE:
+This component uses an enum direction system
+found in game.h
+*/
 
 class ControlComponent : public Component {
     private:
