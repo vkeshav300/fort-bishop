@@ -8,9 +8,3 @@ class TextureManager {
         static SDL_Texture* LoadTexture(const char *filename);
         static void Draw(SDL_Texture *tex, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip);
 };
-
-class SoundManager {
-    public:
-        static void LoadSound(const char *filename);
-        static void Play();
-};

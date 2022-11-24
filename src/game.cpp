@@ -18,14 +18,6 @@ std::vector<HitboxComponent*> Game::collisions;
 // Player Creation
 auto &Player(manager.addEntity());
 
-// Render layer enum
-enum groupLabels : std::size_t {
-    groupMap = 0,
-    groupPlayers,
-    groupEnemies,
-    groupColliders
-};
-
 // Game Constructor
 Game::Game() {}
 
@@ -59,7 +51,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     isRunning = true;
 
     // Setting up neccessary objects and variables
-    Map::LoadMap("assets/tilemaps/base.map", 16, 16);
+    Map::LoadMap("assets/tilemaps/fort-bishop.map", 16, 16);
     
     // Player
     Player.addComponent<TransformComponent>(1, false, 10);
@@ -146,11 +138,19 @@ void Game::clean(double shutdown_delay) {
     float shutdown_ms = shutdown_delay * 1000;
     std::cout << "6: Shutting down in " << shutdown_ms << " ms" << std::endl;
     SDL_Delay(shutdown_ms);
+
+    // Confirms that Game::clean() has run fully
+    std::cout << "7: (6) Game::clean() confirmation" << std::endl;
 }
 
 // Adds tile into ECS & tilemap
 void Game::addTile(int id, int x, int y) {
+    // Creates entity
     auto &tile = manager.addEntity();
+
+    // Adds "TileComponent"
     tile.addComponent<TileComponent>(x, y, 32, 32, id);
+
+    // Adds to MAP rendering group
     tile.addGroup(groupMap);
 }

@@ -23,6 +23,14 @@ enum eDir {
     LEFT
 };
 
+// Enum render layers
+enum groupLabels : std::size_t {
+    groupMap = 0,
+    groupPlayers,
+    groupEnemies,
+    groupColliders
+};
+
 // Game class
 class Game {
     // Private variables
