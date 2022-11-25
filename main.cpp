@@ -1,4 +1,12 @@
-// Entire file puts together game. The actual work goes on in header (.h) and other C++ (.cpp) files
+/*
+Entire file puts together game. Most of the actual work goes on in other files.
+README.md will tell you what you need to know for Game Testing. --> VERY IMPORTANT!
+LICENSE is the license for this code.
+credits.md will tell you all who contributed, and some more.
+./src/ folder contains all other code.
+./src/ECS/ folder contains most entity-component-system related code.
+./assets/ folder contains all assets used for this game (sound, textures, tilemaps, etc.)
+*/
 #include "src/game.h"
 
 // Creating game pointer
@@ -6,7 +14,7 @@ Game *game = nullptr;
 
 // Customize window
 const char *title = "Fort Bishop";
-int size[2] = {512, 512};
+int size[2] = {800, 640};
 bool fullscreen = false;
 
 // FPS limiting
@@ -30,9 +38,7 @@ int main(int argc, char** argv) {
 
         // Makes sure the loop only runs one time per frame
         frameTime = SDL_GetTicks() - frameStart;
-        if(frameDelay > frameTime) {
-            SDL_Delay(frameDelay - frameTime);
-        }
+        if(frameDelay > frameTime) SDL_Delay(frameDelay - frameTime);
     }
 
     // Cleans game after running stopped

@@ -3,17 +3,15 @@ All who contributed to the game (development, grapics, etc.), as well as languag
 
 ## Contributers:
 - Keshav Verma (Coding)
-- Dhruv Reddy (Coding)
 - Joshua ? (Graphical Assets)
 
+Note: **IN NO WAY DO THESE SPONSOR THIS DEVELOPMENT OF THIS GAME**. Applies to all listed below.
 ## Languages Used:
 - C
 - C++
-- Objective-C
-- JSON format
-- Markdown
 
 ## Libraries / Softwares / Frameworks Used:
+- Tiled
 - Simple DirectMedia Layer
 - Simple DirectMedia Layer addons
 - Git

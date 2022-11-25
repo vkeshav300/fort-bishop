@@ -7,8 +7,8 @@
 class TransformComponent: public Component {
     public:
         // Vectors (x, y) for position and velocity
-        Vector2D position = Vector2D(0.0f, 0.0f); // By default position will be set to (0, 0)
-        Vector2D velocity = Vector2D(0.0f, 0.0f); // By default velocity will be set to (0, 0)
+        Vector2D position; // By default position will be set to (0, 0)
+        Vector2D velocity; // By default velocity will be set to (0, 0)
 
         /*
         "move_factor" determines how many pixels / second an entity will move (position.(x,y) = velocity.(x,y) * move_factor)
@@ -30,16 +30,22 @@ class TransformComponent: public Component {
         Vector2D health = Vector2D(10.0f, 10.0f); // By default health will be set to 10/10
 
         // Constructors
-        TransformComponent() = default;
+        TransformComponent() {
+            position.Zero();
+        }
 
         TransformComponent(int SF) {
             scale = SF;
+           
+            position.Zero();
         }
 
         TransformComponent(int SF, bool ndmg, int maxHealth) {
             scale = SF;
             invincible = ndmg;
             health.x = health.y = maxHealth;
+            
+            position.Zero();
         }
         
         TransformComponent(float xPos, float yPos) {
@@ -90,14 +96,14 @@ class TransformComponent: public Component {
         // Initializes component
         void init() override {
             if(invincible) health.x = health.y = 1;
+
+            velocity.Zero();
         }
 
         // Adds the velocity to the position every frame (to move the entity)
         void update() override {
-            velocity.x = velocity.x * move_factor;
-            velocity.y = velocity.y * move_factor;
-
-            position.add(velocity);
+            position.x += velocity.x * move_factor;
+            position.y += velocity.y * move_factor;
         }
 
         // Forces the entity to move to a specific location without factoring in "velocity" or "move_factor"

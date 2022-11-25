@@ -13,6 +13,8 @@ Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
+const char *textureAtlas = "assets/textures/tiles/tile_atlas_NDNF.png";
+
 std::vector<HitboxComponent*> Game::collisions;
 
 // Player Creation
@@ -51,7 +53,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     isRunning = true;
 
     // Setting up neccessary objects and variables
-    Map::LoadMap("assets/tilemaps/fort-bishop.map", 16, 16);
+    Map::LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
     
     // Player
     Player.addComponent<TransformComponent>(1, false, 10);
@@ -144,12 +146,12 @@ void Game::clean(double shutdown_delay) {
 }
 
 // Adds tile into ECS & tilemap
-void Game::addTile(int id, int x, int y) {
+void Game::addTile(int srcX, int srcY, int xpos, int ypos) {
     // Creates entity
     auto &tile = manager.addEntity();
 
     // Adds "TileComponent"
-    tile.addComponent<TileComponent>(x, y, 32, 32, id);
+    tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, textureAtlas);
 
     // Adds to MAP rendering group
     tile.addGroup(groupMap);
