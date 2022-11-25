@@ -3,55 +3,34 @@
 #include "components.h"
 
 class TileComponent : public Component {
-    private:
-        TransformComponent *transform;
-        SpriteComponent *sprite;
-
     public:
-        SDL_Rect tileRect;
-        int tileId;
-        const char *path;
+        SDL_Texture *texture;
+        SDL_Rect srcRect, destRect;
 
         // Constructors
         TileComponent() = default;
 
-        TileComponent(int x, int y, int w, int h, int id) {
-            // Setting tile properties
-            tileRect.x = x;
-            tileRect.y = y;
-            tileRect.w = w;
-            tileRect.h = h;
-            tileId = id;
+        TileComponent(int srcX, int srcY, int xpos, int ypos, const char *path) {
+            // Loads texture
+            texture = TextureManager::LoadTexture(path);
 
-            // Certain integers are mapped to a tile sprite
-            switch(tileId) {
-                case 0:
-                    path = "assets/textures/tiles/grass.png";
-                    break;
+            // Setting up srcRect
+            srcRect.x = srcX;
+            srcRect.y = srcY;
+            srcRect.w = srcRect.h = 32;
 
-                case 1:
-                    path = "assets/textures/tiles/dirt.png";
-                    break;
-
-                case 2:
-                    path = "assets/textures/tiles/water.png";
-                    break;
-
-                default:
-                    break;
-            };
+            // Setting up destRect
+            destRect.x = xpos;
+            destRect.y = ypos;
+            destRect.w = destRect.h = 32;
         }
 
-        // Initializes component
-        void init() override {
-            // Adds and gets "TransformComponent"
-            parent->addComponent<TransformComponent>(tileRect.x, tileRect.y, tileRect.w, tileRect.h, 1);
-            transform = &parent->getComponent<TransformComponent>();
-
-            // Adds and gets "SpriteComponent"
-            parent->addComponent<SpriteComponent>(path);
-            sprite = &parent->getComponent<SpriteComponent>();
+        // Destructor
+        ~TileComponent() {
+            SDL_DestroyTexture(texture);
         }
 
-
+        void draw() override {
+            TextureManager::Draw(texture, srcRect, destRect, SDL_FLIP_NONE);
+        }
 };

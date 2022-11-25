@@ -12,5 +12,11 @@ SDL_Texture* TextureManager::LoadTexture(const char *filename) {
 
 // Drawing a texture
 void TextureManager::Draw(SDL_Texture *tex, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip) {
-    SDL_RenderCopyEx(Game::renderer, tex, &src, &dest, 0.0d, nullptr, flip);
+    /*
+    When passing in NULL for argument 5 in SDL_RenderCopyEx, it will raise an error when compiling.
+    To get around this, creating a double variable and not assigning it a value, then passing that
+    double in will stop any errors.
+    */
+    double nulldouble;
+    SDL_RenderCopyEx(Game::renderer, tex, &src, &dest, nulldouble, nullptr, flip);
 }

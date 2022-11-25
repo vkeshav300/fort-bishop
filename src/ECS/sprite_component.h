@@ -2,7 +2,7 @@
 
 // Including
 #include "components.h"
-#include "animation.h"
+#include "../animation.h"
 #include "../textures.h"
 
 #include <map>
