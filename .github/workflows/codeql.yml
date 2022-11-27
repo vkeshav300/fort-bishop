@@ -81,6 +81,6 @@ jobs:
         # The number of days to wait to close a pull request after it being marked stale. Set to -1 to never close stale pull requests. Override "days-before-close" option regarding only the pull requests.
         days-before-pr-close: 5
         # The label to apply when an issue is stale.
-        stale-issue-label: "Inactive"
+        stale-issue-label: "Issue Inactive"
         # The label to apply when an issue is closed.
-        close-issue-label: "Closed"
+        close-issue-label: "Issue Closed"
