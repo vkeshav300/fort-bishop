@@ -72,3 +72,15 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
+  
+    - name: Close Stale Issues
+      uses: actions/stale@v6.0.1
+      with:
+        # The number of days to wait to close an issue after it being marked stale. Set to -1 to never close stale issues. Override "days-before-close" option regarding only the issues.
+        days-before-issue-close: 15
+        # The number of days to wait to close a pull request after it being marked stale. Set to -1 to never close stale pull requests. Override "days-before-close" option regarding only the pull requests.
+        days-before-pr-close: 5
+        # The label to apply when an issue is stale.
+        stale-issue-label: "Inactive"
+        # The label to apply when an issue is closed.
+        close-issue-label: "Closed"
