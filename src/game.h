@@ -68,6 +68,7 @@ class Game {
         // Returns if the game is running
         inline bool running() {return isRunning;}
 
+        // Adds tile
         static void addTile(int srcX, int srcY, int x, int y);
 
         static SDL_Renderer *renderer;

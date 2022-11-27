@@ -5,8 +5,6 @@
 #include "textures.h"
 
 #include <string>
-#include <fstream>
-#include <cstdlib>
 
 class Map {
     public:

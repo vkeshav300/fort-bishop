@@ -13,7 +13,7 @@ Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
-const char *textureAtlas = "assets/textures/tiles/tile_atlas_NDNF.png";
+const char *textureAtlas = "assets/textures/tiles/tile_atlas.png";
 
 std::vector<HitboxComponent*> Game::collisions;
 
