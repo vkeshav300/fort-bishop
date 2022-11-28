@@ -55,7 +55,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.1
       with:
         name: "fort-bishop.exe"
-        path: "./fort-bishop.exe"
+        path: "fort-bishop.exe"
         error: "No files found using the desired path."
       
     - name: Perform CodeQL Analysis
