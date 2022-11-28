@@ -45,13 +45,20 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+      # Artifact name
+        name: fort-bishop
+      # A file, directory or wildcard pattern that describes what to upload
+        path: "${{github.workspace}}/fort-bishop.exe"
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-        command: "g++ -std=c++11 -Isrc/Include -Lsrc/lib -o fort-bishop ./src/ECS/*.cpp ./src/*.cpp main.cpp -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer"
         
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
