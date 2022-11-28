@@ -20,29 +20,8 @@ on:
   schedule:
     - cron: '17 23 * * 5'
 
-jobs:
-  build:
-    name: Build Project
-    runs-on: windows-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'cpp' ]
-        
-    steps:
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
-    - name: Checkout repository
-      uses: actions/checkout@v2
-        
-    - name: build application
-      run: make build
-      
-  analyze:
+jobs: 
+  build-analyze:
     name: Analyze
     runs-on: windows-latest
     permissions:
@@ -60,6 +39,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+    
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
+    - name: Builds Project
+      run: make build
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
