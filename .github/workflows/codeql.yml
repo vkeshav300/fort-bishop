@@ -22,7 +22,7 @@ on:
 
 jobs: 
   build-analyze:
-    name: Analyze
+    name: Build and Analyze
     runs-on: windows-latest
     permissions:
       actions: read
@@ -39,6 +39,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      
+    - name: Set up MinGW
+      uses: egor-tensin/setup-mingw@v2
+      with:
+        platform: x32
     
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     - name: Builds Project
