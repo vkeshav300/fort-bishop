@@ -14,7 +14,9 @@
 // Forward declaration of "ColliderComponent"
 class HitboxComponent;
 
-// Enum directions
+/* enums */
+
+// Directions
 enum eDir {
     IDLE = 0,
     UP,
@@ -23,7 +25,13 @@ enum eDir {
     LEFT
 };
 
-// Enum render layers
+// Animation cycle types
+enum eAnims {
+    WALK_CYCLE = 0,
+    ITEM
+};
+
+// Render layers
 enum groupLabels : std::size_t {
     groupMap = 0,
     groupPlayers,

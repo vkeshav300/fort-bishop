@@ -52,14 +52,23 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     // Sets isRunning to true to game loop can start
     isRunning = true;
 
-    // Setting up neccessary objects and variables
+    /* Tilemap */
+    // Loads Map
     Map::LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
     
-    // Player
+    /* Player */
+    // Transform (position, velocity, size, etc.)
     Player.addComponent<TransformComponent>(1, false, 10);
+
+    // Animated Sprite
     Player.addComponent<SpriteComponent>("assets/textures/entities/player/player_atlas.png", true);
+    Player.getComponent<SpriteComponent>().addAnim(WALK_CYCLE);
+
+    // Control & Hitbox
     Player.addComponent<ControlComponent>();
     Player.addComponent<HitboxComponent>("player");
+
+    // Rendering Group
     Player.addGroup(groupPlayers);
 }
 
