@@ -33,6 +33,12 @@ jobs:
       with:
         platform: x32
     
+    - name: Change Directory to mingw/bin (1)
+      run: cd .
+
+    - name: Change Directory to mingw/bin (2)
+      run: cd mingw/bin
+      
     - name: Install MinGW-make
       run: mingw-get install mingw32-make
 
