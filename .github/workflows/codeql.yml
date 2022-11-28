@@ -33,7 +33,7 @@ jobs:
       with:
         platform: x32
     
-    - name: Installs MinGW make
+    - name: Install MinGW-make
       run: mingw-get install mingw32-make
 
     - name: Builds Project
