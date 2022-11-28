@@ -1,5 +1,6 @@
 #pragma once
 
+// Animation Structure
 struct Animation {
     int index;
     int frames;

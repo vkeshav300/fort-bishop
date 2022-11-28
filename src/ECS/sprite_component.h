@@ -41,25 +41,9 @@ class SpriteComponent : public Component {
 
             // Sets animated to true
             animated = isAnimated;
-            int move_speed = 250;
-
-            // All walk cycle animations
-            Animation idle = Animation(0, 2, 750);
-            animations.emplace("I", idle);
-
-            Animation walk = Animation(1, 4, move_speed);
-            animations.emplace("H", walk);
-
-            Animation down = Animation(2, 2, move_speed);
-            animations.emplace("D", down);
-
-            Animation up = Animation(3, 2, move_speed);
-            animations.emplace("U", up);
-
-            play("I");
         }
 
-        // Deconstructors
+        // Destructor
         ~SpriteComponent() {
             SDL_DestroyTexture(texture);
         }
@@ -80,6 +64,47 @@ class SpriteComponent : public Component {
             srcRect.x = srcRect.y = 0;
             srcRect.w = transform->size.x;
             srcRect.h = transform->size.y;
+        }
+
+        void addAnim(int animType) {
+            switch(animType) {
+                case WALK_CYCLE: {
+                    int move_speed = 250;
+
+                    // All walk cycle animations
+                    Animation idle = Animation(0, 2, 750);
+                    animations.emplace("I", idle);
+
+                    Animation walk = Animation(1, 4, move_speed);
+                    animations.emplace("H", walk);
+
+                    Animation down = Animation(2, 2, move_speed);
+                    animations.emplace("D", down);
+
+                    Animation up = Animation(3, 2, move_speed);
+                    animations.emplace("U", up);
+
+                    play("I");
+
+                    break;
+                }
+                
+                case ITEM: {
+                    // All item animations
+                    Animation idle = Animation(0, 2, 750);
+                    animations.emplace("I", idle);
+
+                    Animation use = Animation(1, 4, 250);
+                    animations.emplace("U", use);
+
+                    play("I");
+
+                    break;
+                }
+                
+                default:
+                    break;
+            }
         }
 
         // Updates component
