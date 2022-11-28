@@ -51,14 +51,13 @@ jobs:
 
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
-
-
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
-    - name: "Autobuild"
-      run: |
-        ./location_of_script_within_repo/buildscript.sh:
-        g++ -std=c++11 -Isrc/Include -Lsrc/lib -o fort-bishop ./src/ECS/*.cpp ./src/*.cpp main.cpp -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer:
-    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        name: "fort-bishop.exe"
+        path: "./fort-bishop.exe"
+        error: "No files found using the desired path."
+      
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
