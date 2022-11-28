@@ -14,16 +14,22 @@ name: "CodeQL"
 on:
   push:
     branches: [ "master" ]
+    
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "master" ]
+    paths-ignore:
+      - "**/*.md"
+      - "**/*.txt"
+      - "**/*.json"
+    
   schedule:
-    - cron: '28 14 * * 2'
+    - cron: "28 14 * * 2"
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       actions: read
       contents: read
@@ -51,10 +57,14 @@ jobs:
 
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality 
+      
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
+        languages: ${{ matrix.language }}
         category: "/language:${{matrix.language}}"
+        
+      
   
     - name: Close Stale Issues
       uses: actions/stale@v6.0.1
