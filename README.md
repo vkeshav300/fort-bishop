@@ -1,5 +1,5 @@
 # [Fort Bishop](https://github.com/vkeshav300/fort-bishop)
-The Fort Bishop game (**for now Windows 10 / Windows 11 only**).
+[![CodeQL](https://github.com/vkeshav300/fort-bishop/actions/workflows/codeql.yml/badge.svg)](https://github.com/vkeshav300/fort-bishop/actions/workflows/codeql.yml)
 
 ## [Developer](https://github.com/vkeshav300/fort-bishop/#developer-instructions) Instructions:
 > (Git) Get the newest version of the game
