@@ -3,6 +3,3 @@ build:
 
 run:
 	./fort-bishop
-
-pull_m:
-	git pull origin master
