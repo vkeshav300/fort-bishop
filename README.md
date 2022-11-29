@@ -1,5 +1,5 @@
 # [Fort Bishop](https://github.com/vkeshav300/fort-bishop)
-[![CodeQL](https://github.com/vkeshav300/fort-bishop/actions/workflows/codeql.yml/badge.svg)](https://github.com/vkeshav300/fort-bishop/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/vkeshav300/fort-bishop/actions/workflows/codeql.yml/badge.svg)](https://github.com/vkeshav300/fort-bishop/actions/workflows/codeql.yml) [![flawfinder](https://github.com/vkeshav300/fort-bishop/actions/workflows/flawfinder.yml/badge.svg)](https://github.com/vkeshav300/fort-bishop/actions/workflows/flawfinder.yml)
 
 ## [Developer](https://github.com/vkeshav300/fort-bishop/#developer-instructions) Instructions:
 > (Git) Get the newest version of the game
