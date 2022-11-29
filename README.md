@@ -23,13 +23,3 @@ git push origin <branch_name>
 > Stress test the game. Try to find as many bugs and glitches as you can.
 > For each bug / glitch submit a bug / glitch report in [issues](https://github.com/vkeshav300/fort-bishop/issues).
 > Make sure to let the developers know when you are done so they can read your report.
-
-## Understanding The Version System
-v(x.y.z)
-> X is a major release (like from development stages to official first release.)
-> Y is a minor release (includes new features, bug fixes, glitch fixes, etc.)
-> Z is a bug fix (only will be put in a release if the bug / glitch is partially or fully game breaking.)
-
-**Examples:**
-v1.5.4
-> Once major relase, five minor relases, and 4 bug fixes
