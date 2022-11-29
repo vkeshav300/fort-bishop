@@ -69,7 +69,7 @@ class SpriteComponent : public Component {
         void addAnim(int animType) {
             switch(animType) {
                 case WALK_CYCLE: {
-                    int move_speed = 250;
+                    int move_speed = 250 * transform->move_factor;
 
                     // All walk cycle animations
                     Animation idle = Animation(0, 2, 750);

@@ -29,7 +29,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY) {
             srcX = atoi(&c) * 32;
 
             // Adds tile
-            Game::addTile(srcX, srcY, x * 32, y * 32);
+            Game::addTile(srcX, srcY, x * 64, y * 64);
             mapFile.ignore();
         }
     }

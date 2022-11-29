@@ -58,7 +58,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     
     /* Player */
     // Transform (position, velocity, size, etc.)
-    Player.addComponent<TransformComponent>(1, false, 10);
+    Player.addComponent<TransformComponent>(2, false, 10);
 
     // Animated Sprite
     Player.addComponent<SpriteComponent>("assets/textures/entities/player/player_atlas.png", true);
