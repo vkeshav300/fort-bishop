@@ -6,9 +6,6 @@
 ```
 git pull origin master
 ```
-```
-make pull_m
-```
 > Code (and test) your addition
 > (Git) Push in a new branch
 ```
