@@ -49,6 +49,11 @@ class Game {
 
     // Public variables and methods
     public:
+        // Game-wide variables
+        static SDL_Renderer *renderer;
+        static SDL_Event event;
+        static SDL_Rect camera;
+
         // All hitboxes (for all entities)
         static std::vector<HitboxComponent*> collisions;
 
@@ -78,7 +83,4 @@ class Game {
 
         // Adds tile
         static void addTile(int srcX, int srcY, int x, int y);
-
-        static SDL_Renderer *renderer;
-        static SDL_Event event;
 };
