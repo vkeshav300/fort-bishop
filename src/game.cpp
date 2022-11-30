@@ -10,6 +10,10 @@
 Map *map;
 Manager manager;
 
+// Player Game::camera
+SDL_Rect Game::camera = {0, 0, 0, 0};
+
+// Other "Game::" variables
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
@@ -48,6 +52,10 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     
     // Draws background color
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    // Sets Game::camera width and height
+    Game::camera.w = width;
+    Game::camera.h = height;
 
     // Sets isRunning to true to game loop can start
     isRunning = true;
@@ -92,6 +100,16 @@ void Game::handleEvents() {
 void Game::update() {
     manager.update();
     manager.refresh();
+
+    // Handles Game::camera
+    TransformComponent *PlayerTransformComponent = &Player.getComponent<TransformComponent>();
+    Game::camera.x = PlayerTransformComponent->position.x - (Game::camera.w / 2);
+    Game::camera.y = PlayerTransformComponent->position.y - (Game::camera.h / 2);
+
+    if(Game::camera.x < 0) Game::camera.x = 0;
+    if(Game::camera.y < 0) Game::camera.y = 0;
+    if(Game::camera.x > Game::camera.w) Game::camera.x = Game::camera.w;
+    if(Game::camera.y > Game::camera.h) Game::camera.y = Game::camera.h;
 
     // Handles all collisions
     HitboxComponent *PlayerHitboxComponent = &Player.getComponent<HitboxComponent>();

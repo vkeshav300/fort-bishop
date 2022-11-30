@@ -116,8 +116,8 @@ class SpriteComponent : public Component {
             srcRect.y = animIndex * transform->size.y;
 
             // Setting (x, y) of destination projection rect
-            destRect.x = static_cast<int>(transform->position.x);
-            destRect.y = static_cast<int>(transform->position.y);
+            destRect.x = static_cast<int>(transform->position.x) - Game::camera.x;
+            destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
             destRect.w = transform->size.x * transform->scale;
             destRect.h = transform->size.y * transform->scale;
         }
