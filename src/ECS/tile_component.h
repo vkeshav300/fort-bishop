@@ -1,6 +1,8 @@
 #pragma once
 
 #include "components.h"
+#include "../textures.h"
+#include "../vector.h"
 
 class TileComponent : public Component {
     public:
