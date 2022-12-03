@@ -1,28 +1,32 @@
-// Including
-#include "game.h"
-#include "textures.h"
-#include "tilemap.h"
+// src file
 #include "vector.h"
 #include "collision.h"
+#include "textures.h"
+#include "tilemap.h"
+#include "assets.h"
 #include "ECS/components.h"
+#include "game.h"
 
 // Creating neccessary objects and variables
 Map *map;
-Manager manager;
 
 // Player Game::camera
 SDL_Rect Game::camera = {0, 0, 0, 0};
 
-// Other "Game::" variables
+// Assets Manager
+AssetManager *Game::assets = new AssetManager(Game::manager);
+
+// SDL_Renderer (rendering things)
 SDL_Renderer* Game::renderer = nullptr;
+
+// SDL_Event (keypresses, exiting, etc.)
 SDL_Event Game::event;
 
-const char *textureAtlas = "assets/textures/tiles/tile_atlas.png";
-
+// All HitboxComponents (used in update() function for collision checks)
 std::vector<HitboxComponent*> Game::collisions;
 
 // Player Creation
-auto &Player(manager.addEntity());
+auto &Player(Game::manager->addEntity());
 
 // Game Constructor
 Game::Game() {}
@@ -61,15 +65,22 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     isRunning = true;
 
     /* Tilemap */
+    // Adds textures Game::assets
+    assets->addTexture("tiles", "assets/textures/tiles/tile_atlas.png");
+    assets->addTexture("player", "assets/textures/entities/player/player_atlas.png");
+    
+    // Constructs Map *map
+    map = new Map("terrain", 3, 32);
+    
     // Loads Map
-    Map::LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
+    map->LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
     
     /* Player */
     // Transform (position, velocity, size, etc.)
     Player.addComponent<TransformComponent>(2, false, 10);
 
     // Animated Sprite
-    Player.addComponent<SpriteComponent>("assets/textures/entities/player/player_atlas.png", true);
+    Player.addComponent<SpriteComponent>("player", true);
     Player.getComponent<SpriteComponent>().addAnim(WALK_CYCLE);
 
     // Control & Hitbox
@@ -98,8 +109,8 @@ void Game::handleEvents() {
 
 // Updates everything (every frame)
 void Game::update() {
-    manager.update();
-    manager.refresh();
+    Game::manager->update();
+    Game::manager->refresh();
 
     // Handles Game::camera
     TransformComponent *PlayerTransformComponent = &Player.getComponent<TransformComponent>();
@@ -120,9 +131,9 @@ void Game::update() {
 }
 
 // Gets entities from groups
-auto &players(manager.getEntitiesFromGroup(groupPlayers));
-auto &mapEntities(manager.getEntitiesFromGroup(groupMap));
-auto &enemies(manager.getEntitiesFromGroup(groupEnemies));
+auto &players(Game::manager->getEntitiesFromGroup(groupPlayers));
+auto &mapEntities(Game::manager->getEntitiesFromGroup(groupMap));
+auto &enemies(Game::manager->getEntitiesFromGroup(groupEnemies));
 
 // Renders everything to the screen
 void Game::render() {
@@ -148,7 +159,7 @@ void Game::clean(double shutdown_delay) {
     std::cout << " " << std::endl;
     std::cout << "1: Player Deactivated" << std::endl;
 
-    manager.refresh();
+    Game::manager->refresh();
     std::cout << "2: Manager Refreshed" << std::endl;
 
     // Destroys SDL Window
@@ -170,16 +181,4 @@ void Game::clean(double shutdown_delay) {
 
     // Confirms that Game::clean() has run fully
     std::cout << "7: (6) Game::clean() confirmation" << std::endl;
-}
-
-// Adds tile into ECS & tilemap
-void Game::addTile(int srcX, int srcY, int xpos, int ypos) {
-    // Creates entity
-    auto &tile = manager.addEntity();
-
-    // Adds "TileComponent"
-    tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, textureAtlas);
-
-    // Adds to MAP rendering group
-    tile.addGroup(groupMap);
 }

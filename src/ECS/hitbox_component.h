@@ -2,6 +2,7 @@
 
 // Including
 #include "components.h"
+
 #include <string>
 
 class HitboxComponent : public Component {

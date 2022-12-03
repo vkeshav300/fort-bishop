@@ -17,6 +17,7 @@ void TextureManager::Draw(SDL_Texture *tex, SDL_Rect src, SDL_Rect dest, SDL_Ren
     To get around this, creating a double variable and not assigning it a value, then passing that
     double in will stop any errors.
     */
+
     double nulldouble;
     SDL_RenderCopyEx(Game::renderer, tex, &src, &dest, nulldouble, nullptr, flip);
 }

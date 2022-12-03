@@ -1,21 +1,26 @@
-// Other comments found in "game.cpp"
+// Other comments found in "game.cpp" 
 #pragma once
 
-// Including
+/* Including */
+// SDL2
 #include "SDL2/SDL.h"
 #include "SDL2_image/SDL_image.h"
 #include "SDL2_ttf/SDL_ttf.h"
 #include "SDL2_mixer/SDL_mixer.h"
 
+// src file includes found in "game.cpp"
+
+// std
 #include <iostream>
 #include <cmath>
 #include <vector>
 
-// Forward declaration of "ColliderComponent"
+/* Forward Declarations */
 class HitboxComponent;
+class Manager;
+class AssetManager;
 
 /* enums */
-
 // Directions
 enum eDir {
     IDLE = 0,
@@ -54,6 +59,12 @@ class Game {
         static SDL_Event event;
         static SDL_Rect camera;
 
+        // ECS Manager
+        static Manager *manager;
+
+        // Asset Manager
+        static AssetManager *assets;
+
         // All hitboxes (for all entities)
         static std::vector<HitboxComponent*> collisions;
 
@@ -80,7 +91,4 @@ class Game {
 
         // Returns if the game is running
         inline bool running() {return isRunning;}
-
-        // Adds tile
-        static void addTile(int srcX, int srcY, int x, int y);
 };

@@ -4,8 +4,10 @@
 #include "components.h"
 #include "../textures.h"
 #include "../animation.h"
+#include "../assets.h"
 
 #include <map>
+#include <string>
 
 class SpriteComponent : public Component {
     private:
@@ -30,14 +32,14 @@ class SpriteComponent : public Component {
         // Constructors
         SpriteComponent() = default;
         
-        SpriteComponent(const char *path) {
+        SpriteComponent(std::string id) {
             // Loading texture
-            setTex(path);
+            setTex(id);
         }
 
-        SpriteComponent(const char *path, bool isAnimated) {
+        SpriteComponent(std::string id, bool isAnimated) {
             // Loading texture
-            setTex(path);
+            setTex(id);
 
             // Sets animated to true
             animated = isAnimated;
@@ -49,8 +51,8 @@ class SpriteComponent : public Component {
         }
 
         // Wrapper for TextureManager::LoadTexture
-        void setTex(const char *path) {
-            texture = TextureManager::LoadTexture(path);
+        void setTex(std::string id) {
+            texture = Game::assets->getTexture(id);
         }
 
         // Initializes component

@@ -14,9 +14,9 @@ class TileComponent : public Component {
         // Constructors
         TileComponent() = default;
 
-        TileComponent(int srcX, int srcY, int xpos, int ypos, const char *path) {
+        TileComponent(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, std::string id) {
             // Loads texture
-            texture = TextureManager::LoadTexture(path);
+            texture = Game::assets->getTexture(id);
 
             // Sets position
             position.x = xpos;
@@ -25,12 +25,12 @@ class TileComponent : public Component {
             // Setting up srcRect
             srcRect.x = srcX;
             srcRect.y = srcY;
-            srcRect.w = srcRect.h = 32;
+            srcRect.w = srcRect.h = tsize;
 
             // Setting up destRect
             destRect.x = xpos;
             destRect.y = ypos;
-            destRect.w = destRect.h = 64;
+            destRect.w = destRect.h = tsize * tscale;
         }
 
         // Destructor
