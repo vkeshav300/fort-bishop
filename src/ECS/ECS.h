@@ -45,6 +45,7 @@ using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 class Component {
     public:
         Entity* parent;
+        int status;
 
         Component() = default;
         virtual ~Component() = default;

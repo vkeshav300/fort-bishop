@@ -2,6 +2,7 @@
 #include "tilemap.h"
 #include "game.h"
 #include "assets.h"
+#include "ECS/components.h"
 
 #include <fstream>
 #include <cstdlib>

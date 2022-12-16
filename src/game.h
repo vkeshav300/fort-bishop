@@ -8,7 +8,7 @@
 #include "SDL2_ttf/SDL_ttf.h"
 #include "SDL2_mixer/SDL_mixer.h"
 
-// src file includes found in "game.cpp"
+// other file includes found in "game.cpp"
 
 // std
 #include <iostream>
@@ -54,7 +54,8 @@ class Game {
 
     // Public variables and methods
     public:
-        // Game-wide variables
+        /* Game-wide variables */
+        // SDL_ variables
         static SDL_Renderer *renderer;
         static SDL_Event event;
         static SDL_Rect camera;

@@ -13,11 +13,14 @@ Map *map;
 // Player Game::camera
 SDL_Rect Game::camera = {0, 0, 0, 0};
 
+// Entity Component System Manager
+Manager *Game::manager = new Manager();
+
 // Assets Manager
 AssetManager *Game::assets = new AssetManager(Game::manager);
 
 // SDL_Renderer (rendering things)
-SDL_Renderer* Game::renderer = nullptr;
+SDL_Renderer *Game::renderer = nullptr;
 
 // SDL_Event (keypresses, exiting, etc.)
 SDL_Event Game::event;
@@ -41,18 +44,15 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     if (fullscreen) {flags = SDL_WINDOW_FULLSCREEN;}
 
     // Initializes "SDL_INIT_EVERYTHING"
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-    {std::cerr << "Failed at SDL_Init()" << std::endl; return;}
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) std::cerr << "Failed at SDL_Init()" << std::endl; return;
 
     // Creates Window
     window = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
-    if (!window)
-    {std::cerr << "Failed at SDL_CreateWindow()" << std::endl; return;}
+    if(!window) std::cerr << "Failed at SDL_CreateWindow()" << std::endl; return;
 
     // Creates renderer
     renderer = SDL_CreateRenderer(window, -1, flags);
-    if (!renderer)
-    {std::cerr << "Failed at SDL_CreateRenderer()" << std::endl; return;}
+    if(!renderer) std::cerr << "Failed at SDL_CreateRenderer()" << std::endl; return;
     
     // Draws background color
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -70,7 +70,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     assets->addTexture("player", "assets/textures/entities/player/player_atlas.png");
     
     // Constructs Map *map
-    map = new Map("terrain", 3, 32);
+    map = new Map("tiles", 3, 32);
     
     // Loads Map
     map->LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
@@ -144,9 +144,9 @@ void Game::render() {
     Loads all entities for rendering
     Order matters, the last group to be rendered will have higher rendering priority than the others.
     */
-    for(auto &e : mapEntities) {e->draw();}
-    for(auto &e : enemies) {e->draw();}
-    for(auto &e : players) {e->draw();}
+    for(auto &e : mapEntities) e->draw();
+    for(auto &e : enemies) e->draw();
+    for(auto &e : players) e->draw();
 
     // Renders all changes in this frame
     SDL_RenderPresent(renderer);

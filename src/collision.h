@@ -1,7 +1,7 @@
 // Comments found in "collision.cpp"
 #pragma once
 
-#include "game.h"
+#include "SDL2/SDL.h"
 #include "ECS/components.h"
 
 class Collision {

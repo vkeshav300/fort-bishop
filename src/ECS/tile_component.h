@@ -2,6 +2,7 @@
 
 #include "components.h"
 #include "../textures.h"
+#include "../assets.h"
 #include "../vector.h"
 
 class TileComponent : public Component {
