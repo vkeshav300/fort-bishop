@@ -38,10 +38,12 @@ enum eAnims {
 
 // Render layers
 enum groupLabels : std::size_t {
-    groupMap = 0,
+    groupInactiveUI = 0,
+    groupMap,
     groupPlayers,
     groupEnemies,
     groupColliders
+    groupActiveUI
 };
 
 // Game class

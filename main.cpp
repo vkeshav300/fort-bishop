@@ -1,12 +1,14 @@
 /*
-Entire file puts together game. Most of the actual work goes on in other files.
-README.md will tell you what you need to know for Game Testing. --> VERY IMPORTANT!
-LICENSE is the license for this code.
-credits.md will tell you all who contributed, and some more.
-./src/ folder contains all other code.
-./src/ECS/ folder contains most entity-component-system related code.
-./assets/ folder contains all assets used for this game (sound, textures, tilemaps, etc.)
+! Use vscode extension "Better Comments" for better readability.
+* Entire file puts together the game. Most of the actual work goes on in other files.
+! README.md will tell you what you need to know for Game Testing. --> VERY IMPORTANT!
+? LICENSE is the license for this code.
+? credits.md will tell you all who contributed, and some more.
+! ./src/ folder contains all other code.
+* ./src/ECS/ folder contains most entity-component-system related code.
+* ./assets/ folder contains all assets used for this game (sound, textures, tilemaps, etc.)
 */
+
 #include "src/game.h"
 
 // Creating game pointer

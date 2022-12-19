@@ -131,9 +131,11 @@ void Game::update() {
 }
 
 // Gets entities from groups
+auto &inactiveUI(Game::manager->getEntitiesFromGroup(groupInactiveUI));
 auto &players(Game::manager->getEntitiesFromGroup(groupPlayers));
 auto &mapEntities(Game::manager->getEntitiesFromGroup(groupMap));
 auto &enemies(Game::manager->getEntitiesFromGroup(groupEnemies));
+auto &activeUI(Game::manager->getEntitiesFromGroup(groupActiveUI));
 
 // Renders everything to the screen
 void Game::render() {
@@ -141,12 +143,14 @@ void Game::render() {
     SDL_RenderClear(renderer);
     
     /*
-    Loads all entities for rendering
-    Order matters, the last group to be rendered will have higher rendering priority than the others.
+    * Loads all entities for rendering.
+    * Order matters, the last group to be rendered will have higher rendering priority than the others.
     */
+    for(auto &e : inactiveUI) e->draw();
     for(auto &e : mapEntities) e->draw();
     for(auto &e : enemies) e->draw();
     for(auto &e : players) e->draw();
+    for(auto &e : activeUI) e->draw();
 
     // Renders all changes in this frame
     SDL_RenderPresent(renderer);
