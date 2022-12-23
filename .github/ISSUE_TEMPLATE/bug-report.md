@@ -7,9 +7,6 @@ assignees: vkeshav300, dhruv-reddy-21
 
 ---
 
-**Is this a bug or glitch?:**
-(A bug is an error in the code that _**causes an error**_. A glitch doesn't cause an error, but is when code doesn't work as intended to. For example a bug may be a game crash. A glitch may be an error in the hitboxes).
-
 **Describe the bug / glitch**
 A clear and concise description of what the bug is.
 
