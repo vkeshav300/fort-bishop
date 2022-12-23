@@ -42,7 +42,7 @@ enum groupLabels : std::size_t {
     groupMap,
     groupPlayers,
     groupEnemies,
-    groupColliders
+    groupColliders,
     groupActiveUI
 };
 

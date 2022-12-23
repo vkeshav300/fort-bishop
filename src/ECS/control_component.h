@@ -28,116 +28,7 @@ class ControlComponent : public Component {
             sprite = &parent->getComponent<SpriteComponent>();
         }
 
-        // Updates component
-        void update() override {
-            // Adjusts the velocity of the entity
-            if(Game::event.type == SDL_KEYDOWN) {
-                switch (Game::event.key.keysym.sym) {
-                    // Going up
-                    case SDLK_w:
-                        transform->velocity.y = -1;
-                        currentydir = UP;
-                        break;
-
-                    case SDLK_UP:
-                        transform->velocity.y = -1;
-                        currentydir = UP;
-                        break;
-
-                    // Going left
-                    case SDLK_a:
-                        transform->velocity.x = -1;
-                        currentxdir = LEFT;
-                        break;
-
-                    case SDLK_LEFT:
-                        transform->velocity.x = -1;
-                        currentxdir = LEFT;
-                        break;
-
-                    // Going down
-                    case SDLK_s:
-                        transform->velocity.y = 1;
-                        currentydir = DOWN;
-                        break;
-
-                    case SDLK_DOWN:
-                        transform->velocity.y = 1;
-                        currentydir = DOWN;
-                        break;
-
-                    // Going right
-                    case SDLK_d:
-                        transform->velocity.x = 1;
-                        currentxdir = RIGHT;
-                        break;
-                    
-                    case SDLK_RIGHT:
-                        transform->velocity.x = 1;
-                        currentxdir = RIGHT;
-                        break;
-                    
-                    // Default
-                    default:
-                        break;
-                }
-            }
-
-            // Stops entity
-            if(Game::event.type == SDL_KEYUP)
-            {
-                switch (Game::event.key.keysym.sym) {
-                    // Going up
-                    case SDLK_w:
-                        transform->velocity.y = 0;
-                        currentydir = IDLE;
-                        break;
-
-                    case SDLK_UP:
-                        transform->velocity.y = 0;
-                        currentydir = IDLE;
-                        break;
-
-                    // Going left
-                    case SDLK_a:
-                        transform->velocity.x = 0;
-                        currentxdir = IDLE;
-                        break;
-
-                    case SDLK_LEFT:
-                        transform->velocity.x = 0;
-                        sprite->spriteFlip = SDL_FLIP_NONE;
-                        currentxdir = IDLE;
-                        break;
-
-                    // Going down
-                    case SDLK_s:
-                        transform->velocity.y = 0;
-                        currentydir = IDLE;
-                        break;
-
-                    case SDLK_DOWN:
-                        transform->velocity.y = 0;
-                        currentydir = IDLE;
-                        break;
-
-                    // Going right
-                    case SDLK_d:
-                        transform->velocity.x = 0;
-                        currentxdir = IDLE;
-                        break;
-                    
-                    case SDLK_RIGHT:
-                        transform->velocity.x = 0;
-                        currentxdir = IDLE;
-                        break;
-                    
-                    // Default
-                    default:
-                        break;
-                }
-            }
-
+        void playAnimFromEnumDirections() {
             switch(currentydir) {
                 case IDLE:
                     sprite->spriteFlip = SDL_FLIP_NONE;
@@ -220,5 +111,117 @@ class ControlComponent : public Component {
                 default:
                     break;
             }
+        }
+
+        // Updates component
+        void update() override {
+            // Adjusts the velocity of the entity
+            if(Game::event.type == SDL_KEYDOWN) {
+                switch (Game::event.key.keysym.sym) {
+                    // Going up
+                    case SDLK_w:
+                        transform->velocity.y = -1;
+                        currentydir = UP;
+                        break;
+
+                    case SDLK_UP:
+                        transform->velocity.y = -1;
+                        currentydir = UP;
+                        break;
+
+                    // Going left
+                    case SDLK_a:
+                        transform->velocity.x = -1;
+                        currentxdir = LEFT;
+                        break;
+
+                    case SDLK_LEFT:
+                        transform->velocity.x = -1;
+                        currentxdir = LEFT;
+                        break;
+
+                    // Going down
+                    case SDLK_s:
+                        transform->velocity.y = 1;
+                        currentydir = DOWN;
+                        break;
+
+                    case SDLK_DOWN:
+                        transform->velocity.y = 1;
+                        currentydir = DOWN;
+                        break;
+
+                    // Going right
+                    case SDLK_d:
+                        transform->velocity.x = 1;
+                        currentxdir = RIGHT;
+                        break;
+                    
+                    case SDLK_RIGHT:
+                        transform->velocity.x = 1;
+                        currentxdir = RIGHT;
+                        break;
+                    
+                    // Default
+                    default:
+                        break;
+                }
+            }
+
+            // Stops entity
+            if(Game::event.type == SDL_KEYUP) {
+                switch (Game::event.key.keysym.sym) {
+                    // Going up
+                    case SDLK_w:
+                        transform->velocity.y = 0;
+                        currentydir = IDLE;
+                        break;
+
+                    case SDLK_UP:
+                        transform->velocity.y = 0;
+                        currentydir = IDLE;
+                        break;
+
+                    // Going left
+                    case SDLK_a:
+                        transform->velocity.x = 0;
+                        currentxdir = IDLE;
+                        break;
+
+                    case SDLK_LEFT:
+                        transform->velocity.x = 0;
+                        sprite->spriteFlip = SDL_FLIP_NONE;
+                        currentxdir = IDLE;
+                        break;
+
+                    // Going down
+                    case SDLK_s:
+                        transform->velocity.y = 0;
+                        currentydir = IDLE;
+                        break;
+
+                    case SDLK_DOWN:
+                        transform->velocity.y = 0;
+                        currentydir = IDLE;
+                        break;
+
+                    // Going right
+                    case SDLK_d:
+                        transform->velocity.x = 0;
+                        currentxdir = IDLE;
+                        break;
+                    
+                    case SDLK_RIGHT:
+                        transform->velocity.x = 0;
+                        currentxdir = IDLE;
+                        break;
+                    
+                    // Default
+                    default:
+                        break;
+                }
+            }
+
+            playAnimFromEnumDirections();
         }
 };

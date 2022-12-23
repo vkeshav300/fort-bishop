@@ -1,19 +1,17 @@
 {
     "username": null,
-    "inventory": 
-    {
-        "credits": 45,
-        "items": [],
-        "resources":
-        {
-            "wood": 25,
-            "stone": 15
-        }
-    },
+    "level": 1,
+    "inventory": {
+        "currencies": {
+            "credits": 125
+        },
+        "resources": {
+            "wood": 10,
+            "stone": 2,
+            "gold": 0
+        },
+        "items": {
 
-    "health": {
-        "invincible": false,
-        "hp": 10,
-        "mhp": 10
+        }
     }
 }

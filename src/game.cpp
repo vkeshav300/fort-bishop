@@ -44,15 +44,15 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     if (fullscreen) {flags = SDL_WINDOW_FULLSCREEN;}
 
     // Initializes "SDL_INIT_EVERYTHING"
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) std::cerr << "Failed at SDL_Init()" << std::endl; return;
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {std::cerr << "Failed at SDL_Init()" << std::endl; return;}
 
     // Creates Window
     window = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
-    if(!window) std::cerr << "Failed at SDL_CreateWindow()" << std::endl; return;
+    if(!window) {std::cerr << "Failed at SDL_CreateWindow()" << std::endl; return;}
 
     // Creates renderer
     renderer = SDL_CreateRenderer(window, -1, flags);
-    if(!renderer) std::cerr << "Failed at SDL_CreateRenderer()" << std::endl; return;
+    if(!renderer) {std::cerr << "Failed at SDL_CreateRenderer()" << std::endl; return;}
     
     // Draws background color
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

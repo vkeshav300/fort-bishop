@@ -45,11 +45,6 @@ class SpriteComponent : public Component {
             animated = isAnimated;
         }
 
-        // Destructor
-        ~SpriteComponent() {
-            SDL_DestroyTexture(texture);
-        }
-
         // Wrapper for TextureManager::LoadTexture
         void setTex(std::string id) {
             texture = Game::assets->getTexture(id);
@@ -112,14 +107,16 @@ class SpriteComponent : public Component {
         // Updates component
         void update() override {
             // If entity is animated, change selection from animation atlas
-            if(animated) srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / ms_delay) % frames);
+            if(animated) {
+                srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / ms_delay) % frames);
+            }
 
             // Gets the frame from the atlas (if there is one)
             srcRect.y = animIndex * transform->size.y;
 
             // Setting (x, y) of destination projection rect
-            destRect.x = static_cast<int>(transform->position.x) - Game::camera.x;
-            destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
+            destRect.x = static_cast<int>(transform->position.x - Game::camera.x);
+            destRect.y = static_cast<int>(transform->position.y - Game::camera.y);
             destRect.w = transform->size.x * transform->scale;
             destRect.h = transform->size.y * transform->scale;
         }
