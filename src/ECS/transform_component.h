@@ -34,15 +34,11 @@ class TransformComponent: public Component {
             position.Zero();
         }
 
-        TransformComponent(int SF) {
-            scale = SF;
-           
+        TransformComponent(int SF) : scale(SF) {
             position.Zero();
         }
 
-        TransformComponent(int SF, bool ndmg, int maxHealth) {
-            scale = SF;
-            invincible = ndmg;
+        TransformComponent(int SF, bool ndmg, int maxHealth) : scale(SF), invincible(ndmg) {
             health.x = health.y = maxHealth;
             
             position.Zero();
@@ -60,7 +56,7 @@ class TransformComponent: public Component {
             size.y = static_cast<float>(h);
         }
 
-        TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth) {
+        TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth) : invincible(ndmg) {
             // Position and size vectors
             position.x = xPos;
             position.y = yPos;
@@ -68,28 +64,24 @@ class TransformComponent: public Component {
             size.y = static_cast<float>(h);
 
             // Health
-            invincible = ndmg;
             health.x = health.y = maxHealth;
         }
 
-        TransformComponent(float xPos, float yPos, int w, int h, int SF) {
+        TransformComponent(float xPos, float yPos, int w, int h, int SF) : scale(SF) {
             position.x = xPos;
             position.y = yPos;
             size.x = static_cast<float>(w);
             size.y = static_cast<float>(h);
-            scale = SF;
         }
 
-        TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth, int SF) {
+        TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth, int SF) : scale(SF), invincible(ndmg) {
             // Position and size vectors
             position.x = xPos;
             position.y = yPos;
             size.x = static_cast<float>(w);
             size.y = static_cast<float>(h);
-            scale = SF;
 
             // Health
-            invincible = ndmg;
             health.x = health.y = maxHealth;
         }
 

@@ -8,9 +8,7 @@
 #include <cstdlib>
 
 // Constructor
-Map::Map(std::string tID, int ms, int ts) : texID(tID), mapScale(ms), tileSize(ts) {
-	scaledSize = ms * ts;
-}
+Map::Map(std::string tID, int ms, int ts) : texID(tID), mapScale(ms), tileSize(ts), scaledSize(ms * ts) {}
 
 // Deconstructor
 Map::~Map() {}

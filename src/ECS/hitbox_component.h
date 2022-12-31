@@ -14,7 +14,7 @@ class HitboxComponent : public Component {
         // Constructors
         HitboxComponent() = default;
 
-        HitboxComponent(std::string t) {tag = t;}
+        HitboxComponent(std::string t) : tag(t) {}
 
         // Initializes component
         void init() override {

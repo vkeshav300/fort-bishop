@@ -15,10 +15,7 @@ class TileComponent : public Component {
         // Constructors
         TileComponent() = default;
 
-        TileComponent(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, std::string id) {
-            // Loads texture
-            texture = Game::assets->getTexture(id);
-
+        TileComponent(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, std::string id) : texture(Game::assets->getTexture(id)) {
             // Sets position
             position.x = xpos;
             position.y = ypos;

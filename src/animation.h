@@ -8,9 +8,5 @@ struct Animation {
 
     Animation() {}
 
-    Animation(int i, int f, int d) {
-        index = i;
-        frames = f;
-        ms_delay = d;
-    }
+    Animation(int i, int f, int d) : index(i), frames(f), ms_delay(d) {}
 };

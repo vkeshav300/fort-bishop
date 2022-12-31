@@ -37,12 +37,9 @@ class SpriteComponent : public Component {
             setTex(id);
         }
 
-        SpriteComponent(std::string id, bool isAnimated) {
+        SpriteComponent(std::string id, bool isAnimated) : animated(isAnimated) {
             // Loading texture
             setTex(id);
-
-            // Sets animated to true
-            animated = isAnimated;
         }
 
         // Wrapper for TextureManager::LoadTexture
