@@ -1,7 +1,8 @@
 #pragma once
 
 // Animation Structure
-struct Animation {
+struct Animation
+{
     int index;
     int frames;
     int ms_delay;

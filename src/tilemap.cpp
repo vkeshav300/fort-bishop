@@ -14,16 +14,19 @@ Map::Map(std::string tID, int ms, int ts) : texID(tID), mapScale(ms), tileSize(t
 Map::~Map() {}
 
 // Loads a map
-void Map::LoadMap(std::string path, int sizeX, int sizeY) {
+void Map::LoadMap(std::string path, int sizeX, int sizeY)
+{
     char c;
     std::fstream mapFile;
     mapFile.open(path);
 
     int srcX, srcY;
-    
+
     // For (row, column)
-    for(int x = 0; x < sizeX; x++) {
-        for(int y = 0; y < sizeY; y++) {
+    for (int x = 0; x < sizeX; x++)
+    {
+        for (int y = 0; y < sizeY; y++)
+        {
             // Gets srcX and srcY from mapFile via cstdlib atoi function
             mapFile.get(c);
             srcY = atoi(&c) * tileSize;
@@ -40,8 +43,9 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY) {
     mapFile.close();
 }
 
-void Map::addTile(int srcX, int srcY, int xpos, int ypos) {
-    auto& tile(Game::manager->addEntity());
-	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, tileSize, mapScale, texID);
-	tile.addGroup(groupMap);
+void Map::addTile(int srcX, int srcY, int xpos, int ypos)
+{
+    auto &tile(Game::manager->addEntity());
+    tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, tileSize, mapScale, texID);
+    tile.addGroup(groupMap);
 }

@@ -25,13 +25,15 @@ const int frameDelay = 1000 / FPS;
 Uint32 frameStart;
 int frameTime;
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
     // Initializing game
     game = new Game();
     game->init(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size[0], size[1], fullscreen);
 
     // Runs every frame, when game->isRunning is set to false (game->handleEvents()), it will exit the loop and run game.clean()
-    while(game->running()) {
+    while (game->running())
+    {
         frameStart = SDL_GetTicks();
 
         game->handleEvents();
@@ -40,7 +42,8 @@ int main(int argc, char** argv) {
 
         // Makes sure the loop only runs one time per frame
         frameTime = SDL_GetTicks() - frameStart;
-        if(frameDelay > frameTime) SDL_Delay(frameDelay - frameTime);
+        if (frameDelay > frameTime)
+            SDL_Delay(frameDelay - frameTime);
     }
 
     // Cleans game after running stopped

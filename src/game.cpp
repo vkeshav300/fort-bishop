@@ -26,7 +26,7 @@ SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 
 // All HitboxComponents (used in update() function for collision checks)
-std::vector<HitboxComponent*> Game::collisions;
+std::vector<HitboxComponent *> Game::collisions;
 
 // Player Creation
 auto &Player(Game::manager->addEntity());
@@ -38,22 +38,38 @@ Game::Game() {}
 Game::~Game() {}
 
 // Init method
-void Game::init(const char *title, int xPos, int yPos, int width, int height, bool fullscreen) {
+void Game::init(const char *title, int xPos, int yPos, int width, int height, bool fullscreen)
+{
     // Checks for fullscreen
     int flags = 0;
-    if (fullscreen) {flags = SDL_WINDOW_FULLSCREEN;}
+    if (fullscreen)
+    {
+        flags = SDL_WINDOW_FULLSCREEN;
+    }
 
     // Initializes "SDL_INIT_EVERYTHING"
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {std::cerr << "Failed at SDL_Init()" << std::endl; return;}
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+    {
+        std::cerr << "Failed at SDL_Init()" << std::endl;
+        return;
+    }
 
     // Creates Window
     window = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
-    if(!window) {std::cerr << "Failed at SDL_CreateWindow()" << std::endl; return;}
+    if (!window)
+    {
+        std::cerr << "Failed at SDL_CreateWindow()" << std::endl;
+        return;
+    }
 
     // Creates renderer
     renderer = SDL_CreateRenderer(window, -1, flags);
-    if(!renderer) {std::cerr << "Failed at SDL_CreateRenderer()" << std::endl; return;}
-    
+    if (!renderer)
+    {
+        std::cerr << "Failed at SDL_CreateRenderer()" << std::endl;
+        return;
+    }
+
     // Draws background color
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -68,13 +84,13 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     // Adds textures Game::assets
     assets->addTexture("tiles", "assets/textures/tiles/tile_atlas.png");
     assets->addTexture("player", "assets/textures/entities/player/player_atlas.png");
-    
+
     // Constructs Map *map
     map = new Map("tiles", 3, 32);
-    
+
     // Loads Map
     map->LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
-    
+
     /* Player */
     // Transform (position, velocity, size, etc.)
     Player.addComponent<TransformComponent>(2, false, 10);
@@ -92,23 +108,25 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
 }
 
 // Handles all events
-void Game::handleEvents() {
+void Game::handleEvents()
+{
     // Gets all events
     SDL_PollEvent(&event);
     switch (event.type)
     {
-        // If the game is quitting set isRunning to false
-        case SDL_QUIT:
-            isRunning = false;
-            break;
+    // If the game is quitting set isRunning to false
+    case SDL_QUIT:
+        isRunning = false;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 }
 
 // Updates everything (every frame)
-void Game::update() {
+void Game::update()
+{
     Game::manager->update();
     Game::manager->refresh();
 
@@ -117,16 +135,22 @@ void Game::update() {
     Game::camera.x = PlayerTransformComponent->position.x - (Game::camera.w / 2);
     Game::camera.y = PlayerTransformComponent->position.y - (Game::camera.h / 2);
 
-    if(Game::camera.x < 0) Game::camera.x = 0;
-    if(Game::camera.y < 0) Game::camera.y = 0;
-    if(Game::camera.x > Game::camera.w) Game::camera.x = Game::camera.w;
-    if(Game::camera.y > Game::camera.h) Game::camera.y = Game::camera.h;
+    if (Game::camera.x < 0)
+        Game::camera.x = 0;
+    if (Game::camera.y < 0)
+        Game::camera.y = 0;
+    if (Game::camera.x > Game::camera.w)
+        Game::camera.x = Game::camera.w;
+    if (Game::camera.y > Game::camera.h)
+        Game::camera.y = Game::camera.h;
 
     // Handles all collisions
     HitboxComponent *PlayerHitboxComponent = &Player.getComponent<HitboxComponent>();
 
-    for(auto hc: collisions) {
-        if(hc != PlayerHitboxComponent) Collision::AABB(Player.getComponent<HitboxComponent>(), *hc);
+    for (auto hc : collisions)
+    {
+        if (hc != PlayerHitboxComponent)
+            Collision::AABB(Player.getComponent<HitboxComponent>(), *hc);
     }
 }
 
@@ -138,26 +162,33 @@ auto &enemies(Game::manager->getEntitiesFromGroup(groupEnemies));
 auto &activeUI(Game::manager->getEntitiesFromGroup(groupActiveUI));
 
 // Renders everything to the screen
-void Game::render() {
+void Game::render()
+{
     // Clears renderer
     SDL_RenderClear(renderer);
-    
+
     /*
-    * Loads all entities for rendering.
-    * Order matters, the last group to be rendered will have higher rendering priority than the others.
-    */
-    for(auto &e : inactiveUI) e->draw();
-    for(auto &e : mapEntities) e->draw();
-    for(auto &e : enemies) e->draw();
-    for(auto &e : players) e->draw();
-    for(auto &e : activeUI) e->draw();
+     * Loads all entities for rendering.
+     * Order matters, the last group to be rendered will have higher rendering priority than the others.
+     */
+    for (auto &e : inactiveUI)
+        e->draw();
+    for (auto &e : mapEntities)
+        e->draw();
+    for (auto &e : enemies)
+        e->draw();
+    for (auto &e : players)
+        e->draw();
+    for (auto &e : activeUI)
+        e->draw();
 
     // Renders all changes in this frame
     SDL_RenderPresent(renderer);
 }
 
 // Runs on game being quit
-void Game::clean(double shutdown_delay) {
+void Game::clean(double shutdown_delay)
+{
     // Destructs Player
     Player.destroy();
     std::cout << " " << std::endl;

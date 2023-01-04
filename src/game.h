@@ -1,4 +1,4 @@
-// Other comments found in "game.cpp" 
+// Other comments found in "game.cpp"
 #pragma once
 
 /* Including */
@@ -22,7 +22,8 @@ class AssetManager;
 
 /* enums */
 // Directions
-enum eDir {
+enum eDir
+{
     IDLE = 0,
     UP,
     DOWN,
@@ -31,13 +32,15 @@ enum eDir {
 };
 
 // Animation cycle types
-enum eAnims {
+enum eAnims
+{
     WALK_CYCLE = 0,
     ITEM
 };
 
 // Render layers
-enum groupLabels : std::size_t {
+enum groupLabels : std::size_t
+{
     groupInactiveUI = 0,
     groupMap,
     groupPlayers,
@@ -47,51 +50,52 @@ enum groupLabels : std::size_t {
 };
 
 // Game class
-class Game {
+class Game
+{
     // Private variables
-    private:
-        int cnt;
-        bool isRunning;
-        SDL_Window *window;
+private:
+    int cnt;
+    bool isRunning;
+    SDL_Window *window;
 
     // Public variables and methods
-    public:
-        /* Game-wide variables */
-        // SDL_ variables
-        static SDL_Renderer *renderer;
-        static SDL_Event event;
-        static SDL_Rect camera;
+public:
+    /* Game-wide variables */
+    // SDL_ variables
+    static SDL_Renderer *renderer;
+    static SDL_Event event;
+    static SDL_Rect camera;
 
-        // ECS Manager
-        static Manager *manager;
+    // ECS Manager
+    static Manager *manager;
 
-        // Asset Manager
-        static AssetManager *assets;
+    // Asset Manager
+    static AssetManager *assets;
 
-        // All hitboxes (for all entities)
-        static std::vector<HitboxComponent*> collisions;
+    // All hitboxes (for all entities)
+    static std::vector<HitboxComponent *> collisions;
 
-        // Constructor
-        Game();
+    // Constructor
+    Game();
 
-        // Destructor
-        ~Game();
+    // Destructor
+    ~Game();
 
-        // Init method
-        void init(const char* title, int xPos, int yPos, int width, int height, bool fullscreen);
+    // Init method
+    void init(const char *title, int xPos, int yPos, int width, int height, bool fullscreen);
 
-        // Handles all events
-        void handleEvents();
+    // Handles all events
+    void handleEvents();
 
-        // Updates everything
-        void update();
+    // Updates everything
+    void update();
 
-        // Renders everything
-        void render();
+    // Renders everything
+    void render();
 
-        // Cleans up at the end of running
-        void clean(double shutdown_delay);
+    // Cleans up at the end of running
+    void clean(double shutdown_delay);
 
-        // Returns if the game is running
-        inline bool running() {return isRunning;}
+    // Returns if the game is running
+    inline bool running() { return isRunning; }
 };
