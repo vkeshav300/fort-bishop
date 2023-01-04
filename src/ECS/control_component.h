@@ -2,6 +2,8 @@
 
 // Including
 #include "components.h"
+#include "transform_component.h"
+#include "../game.h"
 
 /*
 NOTE:
@@ -47,12 +49,12 @@ public:
             // Full LEFT
             case LEFT:
                 sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
-                sprite->play("walk");
+                sprite->play("H");
                 break;
 
             // Full RIGHT
             case RIGHT:
-                sprite->play("walk");
+                sprite->play("H");
                 break;
 
             default:
@@ -74,12 +76,12 @@ public:
             // UPLEFT
             case LEFT:
                 sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
-                sprite->play("walk");
+                sprite->play("H");
                 break;
 
             // UPRIGHT
             case RIGHT:
-                sprite->play("walk");
+                sprite->play("H");
                 break;
 
             default:
@@ -101,12 +103,12 @@ public:
             // DOWNLEFT
             case LEFT:
                 sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
-                sprite->play("walk");
+                sprite->play("H");
                 break;
 
             // DOWNRIGHT
             case RIGHT:
-                sprite->play("walk");
+                sprite->play("H");
                 break;
 
             default:

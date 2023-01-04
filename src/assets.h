@@ -1,6 +1,6 @@
 #pragma once
 
-// Including
+/* Including */
 #include "textures.h"
 #include "vector.h"
 #include "ECS/ECS.h"
