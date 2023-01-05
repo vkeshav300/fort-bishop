@@ -47,7 +47,7 @@ public:
     // Wrapper for TextureManager::LoadTexture
     void setTex(const char *id)
     {
-        texture = Game::assets->getTexture(id);
+        texture = Game::assets->textures[id];
     }
 
     // Initializes component

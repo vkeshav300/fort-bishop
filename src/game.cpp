@@ -1,5 +1,4 @@
 // src file
-#include "./custom_types/vector.h"
 #include "collision.h"
 #include "textures.h"
 #include "tilemap.h"
@@ -104,7 +103,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     Player.addComponent<HitboxComponent>("player");
 
     // Rendering Group
-    Player.addGroup(groupPlayers);
+    Player.addGroup(LAYER_PLAYER);
 }
 
 // Handles all events
@@ -155,11 +154,11 @@ void Game::update()
 }
 
 // Gets entities from groups
-auto &inactiveUI(Game::manager->getEntitiesFromGroup(groupInactiveUI));
-auto &players(Game::manager->getEntitiesFromGroup(groupPlayers));
-auto &mapEntities(Game::manager->getEntitiesFromGroup(groupMap));
-auto &enemies(Game::manager->getEntitiesFromGroup(groupEnemies));
-auto &activeUI(Game::manager->getEntitiesFromGroup(groupActiveUI));
+auto &inactiveUI(Game::manager->getEntitiesFromGroup(LAYER_UI_INACTIVE));
+auto &players(Game::manager->getEntitiesFromGroup(LAYER_PLAYER));
+auto &mapEntities(Game::manager->getEntitiesFromGroup(LAYER_MAP));
+auto &enemies(Game::manager->getEntitiesFromGroup(LAYER_NPC));
+auto &activeUI(Game::manager->getEntitiesFromGroup(LAYER_UI_ACTIVE));
 
 // Renders everything to the screen
 void Game::render()
@@ -207,7 +206,7 @@ void Game::clean(double shutdown_delay)
 
     // Quits SDL
     SDL_Quit();
-    std::cout << "5: Game Cleaned" << std::endl;
+    std::cout << "5: SDL Quit" << std::endl;
 
     // Delay to see confirmation messages
     float shutdown_ms = shutdown_delay * 1000;

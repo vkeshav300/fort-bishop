@@ -47,5 +47,5 @@ void Map::addTile(int srcX, int srcY, int xpos, int ypos)
 {
     auto &tile(Game::manager->addEntity());
     tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, tileSize, mapScale, texID);
-    tile.addGroup(groupMap);
+    tile.addGroup(LAYER_MAP);
 }

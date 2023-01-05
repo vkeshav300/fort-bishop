@@ -10,7 +10,11 @@
 
 // other file includes found in "game.cpp"
 
-// std
+// Custom types
+#include "./custom_types/vector.h"
+#include "./custom_types/any.h"
+
+// Standard Modules
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -39,14 +43,14 @@ enum eAnims
 };
 
 // Render layers
-enum groupLabels : std::size_t
+enum eRenderLayers : std::size_t
 {
-    groupInactiveUI = 0,
-    groupMap,
-    groupPlayers,
-    groupEnemies,
-    groupColliders,
-    groupActiveUI
+    LAYER_UI_INACTIVE = 0,
+    LAYER_MAP,
+    LAYER_PLAYER,
+    LAYER_NPC,
+    LAYER_COLLISION,
+    LAYER_UI_ACTIVE
 };
 
 enum eStatuses {

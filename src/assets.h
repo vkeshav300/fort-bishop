@@ -11,12 +11,12 @@
 class AssetManager
 {
 private:
-    // Map of textures
-    std::map<const char *, SDL_Texture *> textures;
-
     Manager *manager;
 
 public:
+    // Map of textures
+    std::map<const char *, SDL_Texture *> textures;
+    
     // Constructors
     AssetManager(Manager *mManager);
 
