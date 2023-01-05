@@ -17,6 +17,7 @@ Game *game = nullptr;
 // Customize window
 const char *title = "Fort Bishop";
 int size[2] = {800, 640};
+// int size[2] = {1920, 1080};
 bool fullscreen = false;
 
 // FPS limiting

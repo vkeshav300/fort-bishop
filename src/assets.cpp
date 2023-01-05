@@ -6,16 +6,6 @@ AssetManager::AssetManager(Manager *mManager) : manager(mManager) {}
 // Destructor
 AssetManager::~AssetManager() {}
 
-// Parsing and writing data
-void AssetManager::loadData(const char *path)
-{
-
-}
-
-void AssetManager::saveData(const char *path)
-{
-}
-
 // Adds texture to "textures"
 void AssetManager::addTexture(const char *id, const char *path)
 {

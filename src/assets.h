@@ -23,11 +23,6 @@ public:
     // Destructor
     ~AssetManager();
 
-    // Data Parsing / Writing
-    void loadData(const char *path);
-
-    void saveData(const char *path);
-
     // Adds texture to "textures"
     void addTexture(const char *id, const char *path);
 
