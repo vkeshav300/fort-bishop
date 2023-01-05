@@ -49,7 +49,6 @@ class Component
 {
 public:
     Entity *parent;
-    int status;
 
     Component() = default;
     virtual ~Component() = default;
@@ -78,6 +77,8 @@ private:
     bool active = true;
 
 public:
+    int status;
+
     // Constructors
     Entity(Manager &mManger) : manager(mManger) {}
 

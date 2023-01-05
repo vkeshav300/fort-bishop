@@ -3,19 +3,17 @@
 // Including
 #include "components.h"
 
-#include <string>
-
 class HitboxComponent : public Component
 {
 public:
     TransformComponent *transform;
     SDL_Rect hitbox;
-    std::string tag;
+    const char *tag;
 
     // Constructors
     HitboxComponent() = default;
 
-    HitboxComponent(std::string t) : tag(t) {}
+    HitboxComponent(const char *t) : tag(t) {}
 
     // Initializes component
     void init() override

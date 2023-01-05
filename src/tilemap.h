@@ -4,20 +4,18 @@
 #include "SDL2/SDL.h"
 #include "textures.h"
 
-#include <string>
-
 class Map
 {
 private:
-    std::string texID;
+    const char *texID;
     int mapScale;
     int tileSize;
     int scaledSize;
 
 public:
-    Map(std::string tID, int ms, int ts);
+    Map(const char *tID, int ms, int ts);
     ~Map();
 
-    void LoadMap(std::string path, int sizeX, int sizeY);
+    void LoadMap(const char *path, int sizeX, int sizeY);
     void addTile(int srcX, int srcY, int xpos, int ypos);
 };

@@ -49,6 +49,11 @@ enum groupLabels : std::size_t
     groupActiveUI
 };
 
+enum eStatuses {
+    NONE = 0,
+    ITEM_USE
+};
+
 // Game class
 class Game
 {

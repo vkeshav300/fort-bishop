@@ -8,13 +8,13 @@
 #include <cstdlib>
 
 // Constructor
-Map::Map(std::string tID, int ms, int ts) : texID(tID), mapScale(ms), tileSize(ts), scaledSize(ms * ts) {}
+Map::Map(const char *tID, int ms, int ts) : texID(tID), mapScale(ms), tileSize(ts), scaledSize(ms * ts) {}
 
 // Deconstructor
 Map::~Map() {}
 
 // Loads a map
-void Map::LoadMap(std::string path, int sizeX, int sizeY)
+void Map::LoadMap(const char *path, int sizeX, int sizeY)
 {
     char c;
     std::fstream mapFile;

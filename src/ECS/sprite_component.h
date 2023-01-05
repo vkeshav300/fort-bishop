@@ -7,7 +7,6 @@
 #include "../assets.h"
 
 #include <map>
-#include <string>
 
 class SpriteComponent : public Component
 {
@@ -33,20 +32,20 @@ public:
     // Constructors
     SpriteComponent() = default;
 
-    SpriteComponent(std::string id)
+    SpriteComponent(const char *id)
     {
         // Loading texture
         setTex(id);
     }
 
-    SpriteComponent(std::string id, bool isAnimated) : animated(isAnimated)
+    SpriteComponent(const char *id, bool isAnimated) : animated(isAnimated)
     {
         // Loading texture
         setTex(id);
     }
 
     // Wrapper for TextureManager::LoadTexture
-    void setTex(std::string id)
+    void setTex(const char *id)
     {
         texture = Game::assets->getTexture(id);
     }

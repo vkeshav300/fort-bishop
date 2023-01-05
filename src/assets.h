@@ -6,14 +6,13 @@
 #include "ECS/ECS.h"
 
 #include <map>
-#include <string>
 
 // Asset Manager class
 class AssetManager
 {
 private:
     // Map of textures
-    std::map<std::string, SDL_Texture *> textures;
+    std::map<const char *, SDL_Texture *> textures;
 
     Manager *manager;
 
@@ -24,9 +23,14 @@ public:
     // Destructor
     ~AssetManager();
 
+    // Data Parsing / Writing
+    void loadData(const char *path);
+
+    void saveData(const char *path);
+
     // Adds texture to "textures"
-    void addTexture(std::string id, const char *path);
+    void addTexture(const char *id, const char *path);
 
     // Gets texture from "textures"
-    SDL_Texture *getTexture(std::string id);
+    SDL_Texture *getTexture(const char *id);
 };
