@@ -1,10 +1,10 @@
 // src file
-#include "vector.h"
+#include "./custom_types/vector.h"
 #include "collision.h"
 #include "textures.h"
 #include "tilemap.h"
 #include "assets.h"
-#include "ECS/components.h"
+#include "./ECS/components.h"
 #include "game.h"
 
 // Creating neccessary objects and variables

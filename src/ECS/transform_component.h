@@ -2,7 +2,7 @@
 
 // Including
 #include "components.h"
-#include "../vector.h"
+#include "../custom_types/vector.h"
 
 class TransformComponent : public Component
 {

@@ -3,7 +3,7 @@
 #include "components.h"
 #include "../textures.h"
 #include "../assets.h"
-#include "../vector.h"
+#include "../custom_types/vector.h"
 
 class TileComponent : public Component
 {

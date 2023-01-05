@@ -3,7 +3,7 @@
 // Including
 #include "components.h"
 #include "../textures.h"
-#include "../animation.h"
+#include "../custom_types/animation.h"
 #include "../assets.h"
 
 #include <map>
