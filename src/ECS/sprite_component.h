@@ -29,7 +29,6 @@ public:
 
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
-    // Constructors
     Sprite() = default;
 
     Sprite(const char *id)
@@ -44,13 +43,11 @@ public:
         setTex(id);
     }
 
-    // Wrapper for TextureManager::LoadTexture
     void setTex(const char *id)
     {
         texture = Game::assets->textures[id];
     }
 
-    // Initializes component
     void init() override
     {
         // If entity does not have a "TransformComponent", it will automatically add one to prevent errors
@@ -112,7 +109,6 @@ public:
         }
     }
 
-    // Updates component
     void update() override
     {
         // If entity is animated, change selection from animation atlas
@@ -131,13 +127,12 @@ public:
         destRect.h = transform->size.y * transform->scale;
     }
 
-    // Drawing texture to position of destRect
     void draw() override
     {
         TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
     }
 
-    // Plays specific animation
+    // Plays specified animation
     void play(const char *animName)
     {
         animIndex = animations[animName].index;

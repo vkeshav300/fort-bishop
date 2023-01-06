@@ -22,10 +22,8 @@ private:
     int currentydir = IDLE;
 
 public:
-    // Constructors
     Controller() = default;
 
-    // Initializes component
     void init() override
     {
         transform = &parent->getComponent<Transform>();
@@ -122,7 +120,6 @@ public:
         }
     }
 
-    // Updates component
     void update() override
     {
         // Adjusts the velocity of the entity

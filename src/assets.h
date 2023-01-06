@@ -1,6 +1,8 @@
 #pragma once
 
 /* Including */
+#include "SDL2_ttf/SDL_ttf.h"
+
 #include "textures.h"
 #include "custom_types/vector.h"
 #include "ECS/ecs_base.h"
@@ -16,16 +18,15 @@ private:
 public:
     // Map of textures
     std::map<const char *, SDL_Texture *> textures;
-    
-    // Constructors
+
+    // Map of fonts
+    std::map<const char *, TTF_Font *> fonts;
+
     AssetManager(Manager *mManager);
 
-    // Destructor
     ~AssetManager();
 
-    // Adds texture to "textures"
     void addTexture(const char *id, const char *path);
 
-    // Gets texture from "textures"
-    SDL_Texture *getTexture(const char *id);
+    void addFont(const char *id, const char *path);
 };

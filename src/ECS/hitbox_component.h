@@ -10,12 +10,10 @@ public:
     SDL_Rect hitbox;
     const char *tag;
 
-    // Constructors
     Hitbox() = default;
 
     Hitbox(const char *t) : tag(t) {}
 
-    // Initializes component
     void init() override
     {
         // If entity does not have a "Transform", it will automatically add one to prevent errors
@@ -29,7 +27,6 @@ public:
         Game::collisions.push_back(this);
     }
 
-    // Updates component
     void update() override
     {
         // Updates hitbox

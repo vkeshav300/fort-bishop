@@ -11,9 +11,9 @@ public:
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
 
+    // ! To prevent too many objects being created, the tile component holds its own position that way tiles only need one component (per entity)
     vector position;
 
-    // Constructors
     Tile() = default;
 
     Tile(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, const char *id) : texture(Game::assets->textures[id])
@@ -33,7 +33,6 @@ public:
         destRect.w = destRect.h = tsize * tscale;
     }
 
-    // Destructor
     ~Tile()
     {
         SDL_DestroyTexture(texture);

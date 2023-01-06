@@ -7,30 +7,22 @@
 class Transform : public Component
 {
 public:
-    // Vectors (x, y) for position and velocity
-    vector position; // By default position will be set to (0, 0)
-    vector velocity; // By default velocity will be set to (0, 0)
+    // * Vectors (x, y) for position velocity, and size
+    vector position;
+    vector velocity; 
+    vector size = vector(32.0f, 64.0f); 
+    vector health = vector(10.0f, 10.0f);
+
+    int scale = 1;
 
     /*
-    "move_factor" determines how many pixels / second an entity will move (position.(x,y) = velocity.(x,y) * move_factor)
-    if a player were to drink a potion to adjust their speed, move factor would be adjusted, not velocity.
-    By default "move_factor" will be set to 1.
+    ? "move_factor" determines how many pixels / second an entity will move (position.(x,y) = velocity.(x,y) * move_factor)
+    ? if a player were to drink a potion to adjust their speed, move factor would be adjusted, not velocity.
     */
     float move_factor = 1.0f;
 
-    // Vector (x, y) for size (width, height)
-    vector size = vector(32.0f, 64.0f); // By default size will be set to (0, 0)
+    bool invincible = false;
 
-    // Scale factor
-    int scale = 1; // By default scale will be set to 1
-
-    // Health
-    bool invincible = false; // By default invincible will be set to false
-
-    // Vector (current_health, max_health) for health.
-    vector health = vector(10.0f, 10.0f); // By default health will be set to 10/10
-
-    // Constructors
     Transform()
     {
         position.Zero();
@@ -93,8 +85,6 @@ public:
         // Health
         health.x = health.y = maxHealth;
     }
-
-    // Initializes component
     void init() override
     {
         if (invincible)
@@ -103,21 +93,23 @@ public:
         velocity.Zero();
     }
 
-    // Adds the velocity to the position every frame (to move the entity)
     void update() override
     {
+        /*
+        ? Moves the player by adding velocity * move_factor each frame
+        ? The equation is: Pos = V * Mfactor
+        */
         position.x += velocity.x * move_factor;
         position.y += velocity.y * move_factor;
     }
 
-    // Forces the entity to move to a specific location without factoring in "velocity" or "move_factor"
+    // ? Forces the entity to move to a specific location without factoring in "velocity" or "move_factor"
     void forceMove(int xPos, int yPos)
     {
         position.x = xPos;
         position.y = yPos;
     }
 
-    // Damages entity (with accordance to invicible boolean)
     void damage(int amt)
     {
         if (invincible || health.x <= 0)
@@ -130,7 +122,6 @@ public:
             health.x = 0;
     }
 
-    // Heals the entity (with accordance to invincible boolean)
     void heal(int amt)
     {
         if (invincible)
