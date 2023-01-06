@@ -11,7 +11,7 @@ public:
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
 
-    Vector2D position;
+    vector position;
 
     // Constructors
     TileComponent() = default;

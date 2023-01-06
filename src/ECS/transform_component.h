@@ -8,8 +8,8 @@ class TransformComponent : public Component
 {
 public:
     // Vectors (x, y) for position and velocity
-    Vector2D position; // By default position will be set to (0, 0)
-    Vector2D velocity; // By default velocity will be set to (0, 0)
+    vector position; // By default position will be set to (0, 0)
+    vector velocity; // By default velocity will be set to (0, 0)
 
     /*
     "move_factor" determines how many pixels / second an entity will move (position.(x,y) = velocity.(x,y) * move_factor)
@@ -19,7 +19,7 @@ public:
     float move_factor = 1.0f;
 
     // Vector (x, y) for size (width, height)
-    Vector2D size = Vector2D(32.0f, 64.0f); // By default size will be set to (0, 0)
+    vector size = vector(32.0f, 64.0f); // By default size will be set to (0, 0)
 
     // Scale factor
     int scale = 1; // By default scale will be set to 1
@@ -28,7 +28,7 @@ public:
     bool invincible = false; // By default invincible will be set to false
 
     // Vector (current_health, max_health) for health.
-    Vector2D health = Vector2D(10.0f, 10.0f); // By default health will be set to 10/10
+    vector health = vector(10.0f, 10.0f); // By default health will be set to 10/10
 
     // Constructors
     TransformComponent()

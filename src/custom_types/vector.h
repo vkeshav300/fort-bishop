@@ -2,26 +2,26 @@
 #pragma once
 #include <iostream>
 
-struct Vector2D
+struct vector
 {
     float x;
     float y;
 
     // Constructors
-    Vector2D()
+    vector()
     {
         x = 0.0f;
         y = 0.0f;
     }
 
-    Vector2D(float x, float y)
+    vector(float x, float y)
     {
         this->x = x;
         this->y = y;
     }
 
     // Basic operations
-    Vector2D &add(const Vector2D &vec)
+    vector &add(const vector &vec)
     {
         this->x += vec.x;
         this->y += vec.y;
@@ -29,7 +29,7 @@ struct Vector2D
         return *this;
     }
 
-    Vector2D &subtract(const Vector2D &vec)
+    vector &subtract(const vector &vec)
     {
         this->x -= vec.x;
         this->y -= vec.y;
@@ -37,7 +37,7 @@ struct Vector2D
         return *this;
     }
 
-    Vector2D &multiply(const Vector2D &vec)
+    vector &multiply(const vector &vec)
     {
         this->x *= vec.x;
         this->y *= vec.y;
@@ -45,7 +45,7 @@ struct Vector2D
         return *this;
     }
 
-    Vector2D &divide(const Vector2D &vec)
+    vector &divide(const vector &vec)
     {
         this->x /= vec.x;
         this->y /= vec.y;
@@ -54,53 +54,53 @@ struct Vector2D
     }
 
     // + - * / operators
-    friend const Vector2D &operator+(Vector2D &v1, Vector2D &v2)
+    friend const vector &operator+(vector &v1, vector &v2)
     {
-        const Vector2D &r_v2d = Vector2D(v1.x + v2.x, v1.y + v2.y);
+        const vector &r_v2d = vector(v1.x + v2.x, v1.y + v2.y);
         return r_v2d;
     }
 
-    friend const Vector2D &operator-(Vector2D &v1, Vector2D &v2)
+    friend const vector &operator-(vector &v1, vector &v2)
     {
-        const Vector2D &r_v2d = Vector2D(v1.x - v2.x, v1.y - v2.y);
+        const vector &r_v2d = vector(v1.x - v2.x, v1.y - v2.y);
         return r_v2d;
     }
 
-    friend const Vector2D &operator*(Vector2D &v1, Vector2D &v2)
+    friend const vector &operator*(vector &v1, vector &v2)
     {
-        const Vector2D &r_v2d = Vector2D(v1.x * v2.x, v1.y * v2.y);
+        const vector &r_v2d = vector(v1.x * v2.x, v1.y * v2.y);
         return r_v2d;
     }
 
-    friend const Vector2D &operator/(Vector2D &v1, Vector2D &v2)
+    friend const vector &operator/(vector &v1, vector &v2)
     {
-        const Vector2D &r_v2d = Vector2D(v1.x / v2.x, v1.y / v2.y);
+        const vector &r_v2d = vector(v1.x / v2.x, v1.y / v2.y);
         return r_v2d;
     }
 
     // += -= *= /= operators
-    Vector2D &
-    operator+=(const Vector2D &vec)
+    vector &
+    operator+=(const vector &vec)
     {
         return this->add(vec);
     }
 
-    Vector2D &operator-=(const Vector2D &vec)
+    vector &operator-=(const vector &vec)
     {
         return this->subtract(vec);
     }
 
-    Vector2D &operator*=(const Vector2D &vec)
+    vector &operator*=(const vector &vec)
     {
         return this->multiply(vec);
     }
 
-    Vector2D &operator/=(const Vector2D &vec)
+    vector &operator/=(const vector &vec)
     {
         return this->divide(vec);
     }
 
-    Vector2D &operator*(const int &i)
+    vector &operator*(const int &i)
     {
         this->x *= i;
         this->y *= i;
@@ -108,7 +108,7 @@ struct Vector2D
         return *this;
     }
 
-    Vector2D &Zero()
+    vector &Zero()
     {
         this->x = 0;
         this->y = 0;
@@ -116,7 +116,7 @@ struct Vector2D
         return *this;
     }
 
-    friend std::ostream &operator<<(std::ostream &stream, const Vector2D &vec)
+    friend std::ostream &operator<<(std::ostream &stream, const vector &vec)
     {
         stream << "(" << vec.x << "," << vec.y << ")";
         return stream;
