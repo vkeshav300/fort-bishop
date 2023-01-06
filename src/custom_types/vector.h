@@ -54,24 +54,28 @@ struct Vector2D
     }
 
     // + - * / operators
-    friend Vector2D &operator+(Vector2D &v1, Vector2D &v2)
+    friend const Vector2D &operator+(Vector2D &v1, Vector2D &v2)
     {
-        return v1.add(v2);
+        const Vector2D &r_v2d = Vector2D(v1.x + v2.x, v1.y + v2.y);
+        return r_v2d;
     }
 
-    friend Vector2D &operator-(Vector2D &v1, Vector2D &v2)
+    friend const Vector2D &operator-(Vector2D &v1, Vector2D &v2)
     {
-        return v1.subtract(v2);
+        const Vector2D &r_v2d = Vector2D(v1.x - v2.x, v1.y - v2.y);
+        return r_v2d;
     }
 
-    friend Vector2D &operator*(Vector2D &v1, Vector2D &v2)
+    friend const Vector2D &operator*(Vector2D &v1, Vector2D &v2)
     {
-        return v1.multiply(v2);
+        const Vector2D &r_v2d = Vector2D(v1.x * v2.x, v1.y * v2.y);
+        return r_v2d;
     }
 
-    friend Vector2D &operator/(Vector2D &v1, Vector2D &v2)
+    friend const Vector2D &operator/(Vector2D &v1, Vector2D &v2)
     {
-        return v1.divide(v2);
+        const Vector2D &r_v2d = Vector2D(v1.x / v2.x, v1.y / v2.y);
+        return r_v2d;
     }
 
     // += -= *= /= operators
