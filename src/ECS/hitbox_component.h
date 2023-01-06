@@ -3,28 +3,28 @@
 // Including
 #include "components.h"
 
-class HitboxComponent : public Component
+class Hitbox : public Component
 {
 public:
-    TransformComponent *transform;
+    Transform *transform;
     SDL_Rect hitbox;
     const char *tag;
 
     // Constructors
-    HitboxComponent() = default;
+    Hitbox() = default;
 
-    HitboxComponent(const char *t) : tag(t) {}
+    Hitbox(const char *t) : tag(t) {}
 
     // Initializes component
     void init() override
     {
-        // If entity does not have a "TransformComponent", it will automatically add one to prevent errors
-        if (!parent->hasComponent<TransformComponent>())
+        // If entity does not have a "Transform", it will automatically add one to prevent errors
+        if (!parent->hasComponent<Transform>())
         {
-            parent->addComponent<TransformComponent>();
+            parent->addComponent<Transform>();
         }
 
-        transform = &parent->getComponent<TransformComponent>();
+        transform = &parent->getComponent<Transform>();
 
         Game::collisions.push_back(this);
     }

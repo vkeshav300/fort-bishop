@@ -5,7 +5,7 @@
 #include "../assets.h"
 #include "../custom_types/vector.h"
 
-class TileComponent : public Component
+class Tile : public Component
 {
 public:
     SDL_Texture *texture;
@@ -14,9 +14,9 @@ public:
     vector position;
 
     // Constructors
-    TileComponent() = default;
+    Tile() = default;
 
-    TileComponent(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, const char *id) : texture(Game::assets->textures[id])
+    Tile(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, const char *id) : texture(Game::assets->textures[id])
     {
         // Sets position
         position.x = xpos;
@@ -34,7 +34,7 @@ public:
     }
 
     // Destructor
-    ~TileComponent()
+    ~Tile()
     {
         SDL_DestroyTexture(texture);
     }

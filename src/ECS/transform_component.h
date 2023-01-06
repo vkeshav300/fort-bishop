@@ -4,7 +4,7 @@
 #include "components.h"
 #include "../custom_types/vector.h"
 
-class TransformComponent : public Component
+class Transform : public Component
 {
 public:
     // Vectors (x, y) for position and velocity
@@ -31,30 +31,30 @@ public:
     vector health = vector(10.0f, 10.0f); // By default health will be set to 10/10
 
     // Constructors
-    TransformComponent()
+    Transform()
     {
         position.Zero();
     }
 
-    TransformComponent(int SF) : scale(SF)
+    Transform(int SF) : scale(SF)
     {
         position.Zero();
     }
 
-    TransformComponent(int SF, bool ndmg, int maxHealth) : scale(SF), invincible(ndmg)
+    Transform(int SF, bool ndmg, int maxHealth) : scale(SF), invincible(ndmg)
     {
         health.x = health.y = maxHealth;
 
         position.Zero();
     }
 
-    TransformComponent(float xPos, float yPos)
+    Transform(float xPos, float yPos)
     {
         position.x = xPos;
         position.y = yPos;
     }
 
-    TransformComponent(float xPos, float yPos, int w, int h)
+    Transform(float xPos, float yPos, int w, int h)
     {
         position.x = xPos;
         position.y = yPos;
@@ -62,7 +62,7 @@ public:
         size.y = static_cast<float>(h);
     }
 
-    TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth) : invincible(ndmg)
+    Transform(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth) : invincible(ndmg)
     {
         // Position and size vectors
         position.x = xPos;
@@ -74,7 +74,7 @@ public:
         health.x = health.y = maxHealth;
     }
 
-    TransformComponent(float xPos, float yPos, int w, int h, int SF) : scale(SF)
+    Transform(float xPos, float yPos, int w, int h, int SF) : scale(SF)
     {
         position.x = xPos;
         position.y = yPos;
@@ -82,7 +82,7 @@ public:
         size.y = static_cast<float>(h);
     }
 
-    TransformComponent(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth, int SF) : scale(SF), invincible(ndmg)
+    Transform(float xPos, float yPos, int w, int h, bool ndmg, int maxHealth, int SF) : scale(SF), invincible(ndmg)
     {
         // Position and size vectors
         position.x = xPos;

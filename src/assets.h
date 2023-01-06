@@ -3,7 +3,7 @@
 /* Including */
 #include "textures.h"
 #include "custom_types/vector.h"
-#include "ECS/ECS.h"
+#include "ECS/ecs_base.h"
 
 #include <map>
 

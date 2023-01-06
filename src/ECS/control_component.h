@@ -11,11 +11,11 @@ This component uses an enum direction system
 found in game.h
 */
 
-class ControlComponent : public Component
+class Controller : public Component
 {
 private:
-    TransformComponent *transform;
-    SpriteComponent *sprite;
+    Transform *transform;
+    Sprite *sprite;
 
     // Current directions in (x, y) axis
     int currentxdir = IDLE;
@@ -23,13 +23,13 @@ private:
 
 public:
     // Constructors
-    ControlComponent() = default;
+    Controller() = default;
 
     // Initializes component
     void init() override
     {
-        transform = &parent->getComponent<TransformComponent>();
-        sprite = &parent->getComponent<SpriteComponent>();
+        transform = &parent->getComponent<Transform>();
+        sprite = &parent->getComponent<Sprite>();
     }
 
     void playAnimFromEnumDirections()

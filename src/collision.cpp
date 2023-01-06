@@ -16,7 +16,7 @@ bool Collision::AABB_r(const SDL_Rect &recA, const SDL_Rect &recB)
     return false;
 }
 
-void Collision::AABB(const HitboxComponent &hitA, const HitboxComponent &hitB)
+void Collision::AABB(const Hitbox &hitA, const Hitbox &hitB)
 {
     if (AABB_r(hitA.hitbox, hitB.hitbox))
         hitA.transform->velocity * -1;

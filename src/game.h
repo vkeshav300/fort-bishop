@@ -20,7 +20,7 @@
 #include <vector>
 
 /* Forward Declarations */
-class HitboxComponent;
+class Hitbox;
 class Manager;
 class AssetManager;
 
@@ -82,7 +82,7 @@ public:
     static AssetManager *assets;
 
     // All hitboxes (for all entities)
-    static std::vector<HitboxComponent *> collisions;
+    static std::vector<Hitbox *> collisions;
 
     // Constructor
     Game();

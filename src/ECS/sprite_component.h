@@ -8,11 +8,11 @@
 
 #include <map>
 
-class SpriteComponent : public Component
+class Sprite : public Component
 {
 private:
     // Sprite properties
-    TransformComponent *transform;
+    Transform *transform;
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
 
@@ -30,15 +30,15 @@ public:
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
     // Constructors
-    SpriteComponent() = default;
+    Sprite() = default;
 
-    SpriteComponent(const char *id)
+    Sprite(const char *id)
     {
         // Loading texture
         setTex(id);
     }
 
-    SpriteComponent(const char *id, bool isAnimated) : animated(isAnimated)
+    Sprite(const char *id, bool isAnimated) : animated(isAnimated)
     {
         // Loading texture
         setTex(id);
@@ -54,12 +54,12 @@ public:
     void init() override
     {
         // If entity does not have a "TransformComponent", it will automatically add one to prevent errors
-        if (!parent->hasComponent<TransformComponent>())
+        if (!parent->hasComponent<Transform>())
         {
-            parent->addComponent<TransformComponent>();
+            parent->addComponent<Transform>();
         }
 
-        transform = &parent->getComponent<TransformComponent>();
+        transform = &parent->getComponent<Transform>();
 
         // Setting height and position of projection rects
         srcRect.x = srcRect.y = 0;

@@ -46,6 +46,6 @@ void Map::LoadMap(const char *path, int sizeX, int sizeY)
 void Map::addTile(int srcX, int srcY, int xpos, int ypos)
 {
     auto &tile(Game::manager->addEntity());
-    tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, tileSize, mapScale, texID);
+    tile.addComponent<Tile>(srcX, srcY, xpos, ypos, tileSize, mapScale, texID);
     tile.addGroup(LAYER_MAP);
 }

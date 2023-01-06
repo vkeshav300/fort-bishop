@@ -25,7 +25,7 @@ SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 
 // All HitboxComponents (used in update() function for collision checks)
-std::vector<HitboxComponent *> Game::collisions;
+std::vector<Hitbox *> Game::collisions;
 
 // Player Creation
 auto &Player(Game::manager->addEntity());
@@ -92,15 +92,15 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
 
     /* Player */
     // Transform (position, velocity, size, etc.)
-    Player.addComponent<TransformComponent>(2, false, 10);
+    Player.addComponent<Transform>(2, false, 10);
 
     // Animated Sprite
-    Player.addComponent<SpriteComponent>("player", true);
-    Player.getComponent<SpriteComponent>().addAnim(WALK_CYCLE);
+    Player.addComponent<Sprite>("player", true);
+    Player.getComponent<Sprite>().addAnim(WALK_CYCLE);
 
     // Control & Hitbox
-    Player.addComponent<ControlComponent>();
-    Player.addComponent<HitboxComponent>("player");
+    Player.addComponent<Controller>();
+    Player.addComponent<Hitbox>("player");
 
     // Rendering Group
     Player.addGroup(LAYER_PLAYER);
@@ -130,7 +130,7 @@ void Game::update()
     Game::manager->refresh();
 
     // Handles Game::camera
-    TransformComponent *PlayerTransformComponent = &Player.getComponent<TransformComponent>();
+    Transform *PlayerTransformComponent = &Player.getComponent<Transform>();
     Game::camera.x = PlayerTransformComponent->position.x - (Game::camera.w / 2);
     Game::camera.y = PlayerTransformComponent->position.y - (Game::camera.h / 2);
 
@@ -144,12 +144,12 @@ void Game::update()
         Game::camera.y = Game::camera.h;
 
     // Handles all collisions
-    HitboxComponent *PlayerHitboxComponent = &Player.getComponent<HitboxComponent>();
+    Hitbox *PlayerHitboxComponent = &Player.getComponent<Hitbox>();
 
     for (auto hc : collisions)
     {
         if (hc != PlayerHitboxComponent)
-            Collision::AABB(Player.getComponent<HitboxComponent>(), *hc);
+            Collision::AABB(Player.getComponent<Hitbox>(), *hc);
     }
 }
 
