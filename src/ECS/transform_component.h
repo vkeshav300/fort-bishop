@@ -8,8 +8,8 @@ class Transform : public Component
 {
 public:
     // * Vectors (x, y) for position velocity, and size
-    vector position;
-    vector velocity; 
+    vector position = vector(0.0f, 0.0f);
+    vector velocity = vector(0.0f, 0.0f); 
     vector size = vector(32.0f, 64.0f); 
     vector health = vector(10.0f, 10.0f);
 
@@ -22,22 +22,14 @@ public:
     float move_factor = 1.0f;
 
     bool invincible = false;
+    
+    Transform() = default;
 
-    Transform()
-    {
-        position.Zero();
-    }
-
-    Transform(int SF) : scale(SF)
-    {
-        position.Zero();
-    }
+    Transform(int SF) : scale(SF) {}
 
     Transform(int SF, bool ndmg, int maxHealth) : scale(SF), invincible(ndmg)
     {
         health.x = health.y = maxHealth;
-
-        position.Zero();
     }
 
     Transform(float xPos, float yPos)
@@ -103,7 +95,7 @@ public:
         position.y += velocity.y * move_factor;
     }
 
-    // ? Forces the entity to move to a specific location without factoring in "velocity" or "move_factor"
+    // ? Forces the entity to move to a specific location without factoring in velocity or move_factor
     void forceMove(int xPos, int yPos)
     {
         position.x = xPos;

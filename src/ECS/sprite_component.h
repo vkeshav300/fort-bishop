@@ -43,6 +43,11 @@ public:
         setTex(id);
     }
 
+    ~Sprite()
+    {
+        SDL_DestroyTexture(texture);
+    }
+
     void setTex(const char *id)
     {
         texture = Game::assets->textures[id];

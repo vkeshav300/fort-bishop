@@ -6,8 +6,8 @@
 #include "./ECS/components.h"
 #include "game.h"
 
-// * Creating neccessary objects and variables
-Map *map;
+/* Game-Wide variable assignment / creation */
+Map *Game::map = new Map("tiles", 3, 32);
 
 // * Player Game::camera
 SDL_Rect Game::camera = {0, 0, 0, 0};
@@ -39,29 +39,28 @@ Game::~Game() {}
 // ? Initializes Game
 void Game::init(const char *title, int xPos, int yPos, int width, int height, bool fullscreen)
 {
-    /* Initializing */
-    // ! The following code initializes SDL and all its packages / modules
-    // *  Checks for fullscreen
+    /* Starting Game */
+    // ?  Window flags
     int flags = 0;
     if (fullscreen)
     {
         flags = SDL_WINDOW_FULLSCREEN;
     }
 
-    // *  Initializes "SDL_INIT_EVERYTHING"
+    // !  Initializes SDL2
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
         std::cerr << "Failed at SDL_Init()" << std::endl;
         return;
     }
 
-    // *  Initializes "SDL2_TTF"
+    // !  Initializes SDL2 TTF"
     if(TTF_Init() < 0)
     {
         std::cerr << "Failed at TTF_Init()" << std::endl;
     }
 
-    // *  Creates Window
+    // !  Creates and checks window
     window = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
     if (!window)
     {
@@ -69,54 +68,51 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
         return;
     }
 
-    // *  Creates renderer
+    // !  Creates and checks renderer
     renderer = SDL_CreateRenderer(window, -1, flags);
-    if (!renderer)
+    if (renderer < 0)
     {
         std::cerr << "Failed at SDL_CreateRenderer()" << std::endl;
         return;
     }
 
-    // *  Draws background color
+    // *  Draws background color (white)
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    // *  Sets Game::camera width and height
-    Game::camera.w = width;
-    Game::camera.h = height;
+    // * Camera Properties
+    camera.w = width;
+    camera.h = height;
 
-    // *  Sets isRunning to true to game loop can start
     isRunning = true;
 
-    /* Tilemap */
-    // ! The following code creates the tilemap
-    // *  Adds textures Game::assets
-    assets->addTexture("tiles", "assets/textures/tiles/tile_atlas.png");
+    /* Loading Assets */
+    // ? Textures
+    assets->addTexture("tiles", "assets/textures/tilemap/tile_atlas.png");
     assets->addTexture("player", "assets/textures/entities/player/player_atlas.png");
 
-    // *  Constructs Map *map
+    // ? Colors
+    assets->addColor("white", 255, 255, 255);
+    assets->addColor("red", 255, 0, 0);
+
+    // ? Fonts
+    assets->addFont("Retro Gaming", "assets/fonts/Retro_Gaming.ttf", 25);
+
+    /* Loading Tilemap */
     map = new Map("tiles", 3, 32);
 
-    // *  Loads Map
     map->LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
 
-    /* Player */
-    // *  ! The following code creates the Player
-    // *  Transform (position, velocity, size, etc.)
+    /* Loading Player */
     Player.addComponent<Transform>(2, false, 10);
-
-    // *  Animated Sprite
     Player.addComponent<Sprite>("player", true);
     Player.getComponent<Sprite>().addAnim(WALK_CYCLE);
-
-    // *  Control & Hitbox
     Player.addComponent<Controller>();
     Player.addComponent<Hitbox>("player");
-
-    // *  Rendering Group
     Player.addGroup(LAYER_PLAYER);
-
-    /* Other Things */
     
+    /* Ui */
+    auto &testUi(Game::manager->addEntity());
+    testUi.addComponent<UiLabel>("Retro Gaming", "red", "Hello World!", 100, 100, 100, 100);
 }
 
 // ? Handles all events

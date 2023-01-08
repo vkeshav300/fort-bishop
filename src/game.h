@@ -22,6 +22,7 @@
 /* Forward Declarations */
 class Hitbox;
 class Manager;
+class Map;
 class AssetManager;
 
 /* enums */
@@ -77,6 +78,9 @@ public:
 
     // ECS Manager
     static Manager *manager;
+
+    // Tilemap
+    static Map *map;
 
     // Asset Manager
     static AssetManager *assets;
