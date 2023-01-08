@@ -53,22 +53,6 @@ public:
         texture = Game::assets->textures[id];
     }
 
-    void init() override
-    {
-        // If entity does not have a "TransformComponent", it will automatically add one to prevent errors
-        if (!parent->hasComponent<Transform>())
-        {
-            parent->addComponent<Transform>();
-        }
-
-        transform = &parent->getComponent<Transform>();
-
-        // Setting height and position of projection rects
-        srcRect.x = srcRect.y = 0;
-        srcRect.w = transform->size.x;
-        srcRect.h = transform->size.y;
-    }
-
     void addAnim(int animType)
     {
         switch (animType)
@@ -112,6 +96,22 @@ public:
         default:
             break;
         }
+    }
+
+    void init() override
+    {
+        // If entity does not have a "TransformComponent", it will automatically add one to prevent errors
+        if (!parent->hasComponent<Transform>())
+        {
+            parent->addComponent<Transform>();
+        }
+
+        transform = &parent->getComponent<Transform>();
+
+        // Setting height and position of projection rects
+        srcRect.x = srcRect.y = 0;
+        srcRect.w = transform->size.x;
+        srcRect.h = transform->size.y;
     }
 
     void update() override

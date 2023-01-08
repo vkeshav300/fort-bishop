@@ -112,7 +112,8 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     
     /* Ui */
     auto &testUi(Game::manager->addEntity());
-    testUi.addComponent<UiLabel>("Retro Gaming", "red", "Hello World!", 100, 100, 100, 100);
+    testUi.addComponent<UiLabel>("Retro Gaming", "white", "Hello World!", 500, 100, 100, 100, true);
+    testUi.addGroup(LAYER_UI_ACTIVE_BEHIND);
 }
 
 // ? Handles all events
@@ -164,10 +165,11 @@ void Game::update()
 
 // *  Gets entities from groups
 auto &inactiveUI(Game::manager->getEntitiesFromGroup(LAYER_UI_INACTIVE));
-auto &players(Game::manager->getEntitiesFromGroup(LAYER_PLAYER));
 auto &mapEntities(Game::manager->getEntitiesFromGroup(LAYER_MAP));
 auto &enemies(Game::manager->getEntitiesFromGroup(LAYER_NPC));
-auto &activeUI(Game::manager->getEntitiesFromGroup(LAYER_UI_ACTIVE));
+auto &activeUiBehind(Game::manager->getEntitiesFromGroup(LAYER_UI_ACTIVE_BEHIND));
+auto &players(Game::manager->getEntitiesFromGroup(LAYER_PLAYER));
+auto &activeUiFront(Game::manager->getEntitiesFromGroup(LAYER_UI_ACTIVE_FRONT));
 
 // ? Renders everything to the screen
 void Game::render()
@@ -181,13 +183,20 @@ void Game::render()
      */
     for (auto &e : inactiveUI)
         e->draw();
+
     for (auto &e : mapEntities)
         e->draw();
+
     for (auto &e : enemies)
         e->draw();
+
+    for (auto &e : activeUiBehind)
+        e->draw();
+
     for (auto &e : players)
         e->draw();
-    for (auto &e : activeUI)
+
+    for (auto &e : activeUiFront)
         e->draw();
 
     // *  Renders all changes in this frame

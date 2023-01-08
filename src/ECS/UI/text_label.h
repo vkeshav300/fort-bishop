@@ -10,6 +10,8 @@ public:
     // ? Text Label Properties
     const char *text;
 
+    bool camera_interact = false;
+
     vector position, size;
 
     TTF_Font *font;
@@ -23,6 +25,22 @@ public:
     UiLabel() = default;
 
     UiLabel(const char *font_id, const char *color_id, const char *display_text, int w, int h, int xPos, int yPos) : text(display_text)
+    {
+        // * Getting font properties from Game::assets
+        font = Game::assets->fonts[font_id];
+        color = Game::assets->colors[color_id];
+
+        // ? Size and position
+        size.x = w;
+        size.y = h;
+
+        position.x = xPos;
+        position.y = yPos;
+
+        srcRect.x = srcRect.y = 0;
+    }
+
+    UiLabel(const char *font_id, const char *color_id, const char *display_text, int w, int h, int xPos, int yPos, bool interacts_with_camera) : text(display_text), camera_interact(interacts_with_camera)
     {
         // * Getting font properties from Game::assets
         font = Game::assets->fonts[font_id];
@@ -67,11 +85,20 @@ public:
 
     void update() override
     {
+        // Updates size
         srcRect.w = destRect.w = size.x;
         srcRect.h = destRect.h = size.y;
 
-        destRect.x = position.x;
-        destRect.y = position.y;
+        // Changes position according to Game::camera
+        if (camera_interact)
+        {
+            destRect.x = position.x - Game::camera.x;
+            destRect.y = position.y - Game::camera.y;
+        } else
+        {
+            destRect.x = position.x;
+            destRect.y = position.y;
+        }
 
         texture = TextureManager::LoadFont(font, *color, text);
     }

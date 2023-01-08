@@ -48,10 +48,11 @@ enum eRenderLayers : std::size_t
 {
     LAYER_UI_INACTIVE = 0,
     LAYER_MAP,
-    LAYER_PLAYER,
     LAYER_NPC,
-    LAYER_COLLISION,
-    LAYER_UI_ACTIVE
+    LAYER_UI_ACTIVE_BEHIND,
+    LAYER_PLAYER,
+    LAYER_UI_ACTIVE_FRONT,
+
 };
 
 enum eStatuses {

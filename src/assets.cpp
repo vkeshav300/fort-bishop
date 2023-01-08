@@ -28,6 +28,6 @@ void AssetManager::addFont(const char *id, const char *path, int size)
 
 void AssetManager::addColor(const char *id, Uint8 r, Uint8 g, Uint8 b)
 {
-    SDL_Color color = {r, g, b};
+    SDL_Color color = {g, r, b};
     colors.emplace(id, &color);
 }
