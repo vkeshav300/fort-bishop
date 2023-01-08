@@ -94,11 +94,12 @@ public:
         {
             destRect.x = position.x - Game::camera.x;
             destRect.y = position.y - Game::camera.y;
-        } else
-        {
-            destRect.x = position.x;
-            destRect.y = position.y;
+            
+            return;
         }
+
+        destRect.x = position.x;
+        destRect.y = position.y;
 
         texture = TextureManager::LoadFont(font, *color, text);
     }
