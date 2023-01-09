@@ -70,7 +70,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
 
     // !  Creates and checks renderer
     renderer = SDL_CreateRenderer(window, -1, flags);
-    if (renderer < 0)
+    if (!renderer)
     {
         std::cerr << "Failed at SDL_CreateRenderer()" << std::endl;
         return;
