@@ -16,7 +16,7 @@ public:
 
     TTF_Font *font;
     SDL_Color *color;
-    
+
     // ? To render the font, the font must be converted into a SDL_Texture
     SDL_Texture *texture;
 
@@ -94,12 +94,12 @@ public:
         {
             destRect.x = position.x - Game::camera.x;
             destRect.y = position.y - Game::camera.y;
-            
-            return;
         }
-
-        destRect.x = position.x;
-        destRect.y = position.y;
+        else
+        {
+            destRect.x = position.x;
+            destRect.y = position.y;
+        }
 
         texture = TextureManager::LoadFont(font, *color, text);
     }
