@@ -55,7 +55,7 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
     }
 
     // !  Initializes SDL2 TTF"
-    if(TTF_Init() < 0)
+    if (TTF_Init() < 0)
     {
         std::cerr << "Failed at TTF_Init()" << std::endl;
     }
@@ -87,33 +87,29 @@ void Game::init(const char *title, int xPos, int yPos, int width, int height, bo
 
     /* Loading Assets */
     // ? Textures
-    assets->addTexture("tiles", "assets/textures/tilemap/tile_atlas.png");
-    assets->addTexture("player", "assets/textures/entities/player/player_atlas.png");
+    assets->addTexture("TERRAIN-TILES", "assets/textures/tilemap/tile_atlas.png");
+    assets->addTexture("ENTITIES-PLAYER", "assets/textures/entities/player/player_atlas.png");
+    assets->addTexture("UI-CREDITS", "assets/textures/ui/credits.png");
 
     // ? Colors
     assets->addColor("white", 255, 255, 255);
     assets->addColor("red", 255, 0, 0);
 
     // ? Fonts
-    assets->addFont("Retro Gaming", "assets/fonts/Retro_Gaming.ttf", 25);
+    assets->addFont("RG-UI-SMALL", "assets/fonts/Retro_Gaming.ttf", 8);
 
     /* Loading Tilemap */
-    map = new Map("tiles", 3, 32);
+    map = new Map("TERRAIN-TILES", 3, 32);
 
     map->LoadMap("assets/tilemaps/fort-bishop.map", 25, 20);
 
     /* Loading Player */
     Player.addComponent<Transform>(2, false, 10);
-    Player.addComponent<Sprite>("player", true);
+    Player.addComponent<Sprite>("ENTITIES-PLAYER", true, true);
     Player.getComponent<Sprite>().addAnim(WALK_CYCLE);
     Player.addComponent<Controller>();
-    Player.addComponent<Hitbox>("player");
+    Player.addComponent<Hitbox>("Player");
     Player.addGroup(LAYER_PLAYER);
-    
-    /* Ui */
-    auto &testUi(Game::manager->addEntity());
-    testUi.addComponent<UiLabel>("Retro Gaming", "white", "Hello World!", 500, 100, 100, 100, true);
-    testUi.addGroup(LAYER_UI_ACTIVE_BEHIND);
 }
 
 // ? Handles all events

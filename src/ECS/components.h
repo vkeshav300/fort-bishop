@@ -12,5 +12,5 @@
 #include "tile_component.h"
 
 // * Ui Components
-#include "UI/text_label.h"
-#include "UI/button.h"
+#include "UI/ui_label.h"
+#include "UI/ui_button.h"

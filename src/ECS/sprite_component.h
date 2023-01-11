@@ -15,6 +15,7 @@ private:
     Transform *transform;
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
+    bool camera_interact = true;
 
     // Animation properties
     bool animated = false;
@@ -33,13 +34,21 @@ public:
 
     Sprite(const char *id)
     {
-        // Loading texture
+        setTex(id);
+    }
+
+    Sprite(bool cam_interact, const char *id) : camera_interact(cam_interact)
+    {
         setTex(id);
     }
 
     Sprite(const char *id, bool isAnimated) : animated(isAnimated)
     {
-        // Loading texture
+        setTex(id);
+    }
+
+    Sprite(const char *id, bool isAnimated, bool cam_interact) : animated(isAnimated), camera_interact(cam_interact)
+    {
         setTex(id);
     }
 
@@ -126,8 +135,17 @@ public:
         srcRect.y = animIndex * transform->size.y;
 
         // Setting (x, y) of destination projection rect
-        destRect.x = static_cast<int>(transform->position.x - Game::camera.x);
-        destRect.y = static_cast<int>(transform->position.y - Game::camera.y);
+        if (camera_interact)
+        {
+            destRect.x = static_cast<int>(transform->position.x - Game::camera.x);
+            destRect.y = static_cast<int>(transform->position.y - Game::camera.y);
+        }
+        else
+        {
+            destRect.x = static_cast<int>(transform->position.x);
+            destRect.y = static_cast<int>(transform->position.y);
+        }
+
         destRect.w = transform->size.x * transform->scale;
         destRect.h = transform->size.y * transform->scale;
     }
