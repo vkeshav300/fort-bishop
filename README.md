@@ -20,10 +20,3 @@ git push origin <branch_name>
 > Stress test the game. Try to find as many bugs and glitches as you can.
 > For each bug / glitch submit a bug / glitch report in [issues](https://github.com/vkeshav300/fort-bishop/issues).
 > Make sure to let the developers know when you are done so they can read your report.
-
-## [Documentation](https://github.com/vkeshav300/fort-bishop/#documentation):
-> The full documentation is in the docs folder in the format of PDFs.
-> Documentation is useful for coders trying to understand how to code works. Without looking at confusing code and comments, you can get a good understanding on how some of the game's systems work.
-
-## Other Stuff:
-This game uses the [Creative Commons Zero v1.0 Universal license](https://github.com/vkeshav300/fort-bishop/blob/master/LICENSE). We encourage you to modify this game and see what you can do!
